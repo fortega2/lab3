@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Html elementos básicos (Ej01HtmlBasico)</title>
+</head>
+
+<body>
+    <header>
+        <h1>Primer parrafo corto (incluye el retorno de carro)</h1> 
+        <h2>Segundo parrafo corto (incluye el retorno de carro)</h2>
+        <h2>Grupo de elementos de naveción</h2>
+        
+        <nav>
+            <ul>
+                <li>
+                    <a href="https://ar.mail.yahoo.com/">Yahoo</a>
+                </li>
+                <li>
+                    <a href="https://www.google.com.ar/webhp">Google</a>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/">YouTube</a>
+                </li>
+            </ul>
+        </nav>
+        
+        <nav>
+            <hr> 
+            <a href="ej01OtraPaginaMismaVentana.html">Enlace a otra página dentro de la misma página</a>
+            <a href="ej01OtraPaginaNuevaVentana.html" target="_blank" rel="noreferrer">Enclace a otra página en otra pestaña</a>
+            <a href="#anclaje">Ancla a otro punto de esta página</a>
+            <hr> 
+        </nav>       
+    </header>
+    
+    <main>
+        <section>
+            <!-- <article> -->
+                <h1>Cuerpo pricipal del contenido</h1>
+                <p>
+                    La etiqueta main es en HTML5 una etiqueta semántica. Esto quiere decir que tiene que ver con el significado de lo contenido dentro de ella. Define el contenido principal de la página. Unicamente solo puede haber una sola etiqueta como esta en todo el documento.
+                    <br>El contenido escrito aqui dentro no se repite en el resto del sitio (todo lo contrario a los encabezados de página, los menues de navegación y los pie de página). Es usado por los navegadores para indexar.
+                    <br>Conviene usar aquí textos que ayuden a encontrar la página luego de procesos de indexación de los buscadores.
+                </p>
+            <!-- </article> -->
+            
+            <article>
+                <header>
+                    <h2>Sección etiqueres semánticas estructurales más importantes</h2>
+                </header>
+                <ul>
+                    <li>
+                        HEADER
+                    </li>
+                    <li>
+                        FOOTER
+                    </li>
+                    <li>
+                        SECTION
+                    </li>
+                    <li>
+                        ARTICLE
+                    </li>
+                    <li>
+                        NAV
+                    </li>
+                    <li>
+                        ADDRES
+                    </li>
+                </ul>
+                <footer>
+                    <p>Las etiquetas semánticas estructurales están relacionadas directamente con el significado del contenido y no con los estilos ni las posiciones dentro del documento</p>
+                </footer>
+            </article>
+            
+            <article>
+                <header>
+                    <h2>Reglas para etiquetas semánticas</h2>
+                </header>
+                <ul>
+                    <li>
+                        Los distintos tipos de contenido se pueden asociar a las etiquetes SECTION
+                    </li>
+                    <li>
+                        Las unidades de cintenido se asocian a las etiquetes ARTICLE. O sea que en un SECTION anida multiples ARTICLES
+                    </li>
+                    <li>
+                        Las etiquetes HEADER y FOOTER pueden ser anidadas dentro de otras HEADER o FOOTER. O sea un FOOTER podria anidar otro HEADER y FOOTER
+                    </li>
+                    <li>
+                        La etiqueta NAV debe ser única en el documento y corresponde a los elementos de navegación del documento
+                    </li>
+                    <li>
+                        Reservar etiqueta h1 para usar dentro de etiquetas top level como main, header o footer
+                    </li>
+                </ul>
+            </article>
+        </section>
+
+        <section>
+            <header>
+                <h2>Section de imágenes</h2>
+                <p>En esta sección mostraremos imágenes identificativas de nuestro sitio</p>
+                <p>La siguiente imagen está insertada en tamaño natural</p>
+            </header>
+            <img src="./el-greco-pintura.jpg" alt="Pintura de Santa Ana - El Greco">
+            <p>La misma imagen, cuadro de El Greco (300px x 362)</p>
+            <p>De acuerdo a la dimensión de la imagen, solo la primera no pixelará</p>
+            <p>Cada elemento img se ubica al lado de la anterior hasta completar el ancho de la ventana activa (viewport)</p>
+            <p>Todas las siguientes imágenes se verán deformadas por haber definido doble parametro de estilo (ancho y alto)</p>
+            <img src="./el-greco-pintura.jpg" alt="Pintura de Santa Ana - El Greco (100px - 550px)" style="width: 100px; height: 550px;">
+            <img src="./el-greco-pintura.jpg" alt="Pintura de Santa Ana - El Greco (220px - 550px)" style="width: 220px; height: 550px;">
+            <img src="./el-greco-pintura.jpg" alt="Pintura de Santa Ana - El Greco (300px - 550px)" style="width: 300px; height: 550px;">
+            <img src="./el-greco-pintura.jpg" alt="Pintura de Santa Ana - El Greco (360px - 550px)" style="width: 360px; height: 550px;">
+            <img src="./el-greco-pintura.jpg" alt="Pintura de Santa Ana - El Greco (500px - 550px)" style="width: 500px; height: 550px;">
+        </section>
+
+        <section>
+            <header>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <hr>
+                <h2>Section de video</h2>
+            </header>
+            <video controls>
+                <source src="caballos-corriendo.mp4" type="video/mp4">
+            </video>
+        </section>
+    </main>
+    <footer>
+        <header>
+            <h2>Anclajes</h2>
+        </header>
+        <a id="anclaje">Punto del anclado</a>
+        <footer>
+            <h1>Datos del alumno</h1>
+            <p>Gustavo W Av Gral Paz 8888</p>
+            <a href="https://contacts.google.com/person/c399201915998879484" target="_blank" rel="noreferrer">gwittbecker@gmail.com</a>
+        </footer>
+    </footer>
+</body>
