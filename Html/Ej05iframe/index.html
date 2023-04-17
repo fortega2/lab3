@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5 Html - iframe</title>
+</head>
+<body>
+    <header>
+        <h1>Índice</h1>
+        <nav>
+            <ol>
+                <li>
+                    <a href="../Ej01HtmlBasico/index.html" target="iframe-archivos">Html básico</a>
+                </li>
+                <li>
+                    <a href="../Ej02Tablas/index.html" target="iframe-archivos">Tablas</a>
+                </li>
+                <li>
+                    <a href="../Ej03Formulario/index.html" target="iframe-archivos">Formulario</a>
+                </li>
+                <li>
+                    <a href="../Ej04ListaArchivos/index.html" target="iframe-archivos">Lista archivos</a>
+                </li>
+                <li>
+                    <a href="./Manualhtml.pdf" target="iframe-archivos">Archivo PDF</a>
+                </li>
+                <li>
+                    <a href="./caballos-corriendo.mp4" target="iframe-archivos">Archivo de un video local</a>
+                </li>
+            </ol>
+        </nav>
+    </header>
+    <main>
+        <header>
+            <h2>Iframe para presentar los ejercicios anteriores un PDF y un video streaming de Youtube</h2>
+        </header>
+        <section>
+            <iframe src="../Ej01HtmlBasico/index.html" name="iframe-archivos" style="height: 450px; width: 80%; border: solid;"></iframe>
+        </section>
+        <br>
+        <section>
+            <iframe width="932px" height="524px" src="https://www.youtube.com/embed/xv9fSIG5i8A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;picture-in-picture" allowfullscreen></iframe>
+        </section>
+    </main>
+</body>
+</html>
