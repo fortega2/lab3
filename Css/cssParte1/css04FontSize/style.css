@@ -1,0 +1,42 @@
+body {
+    font-size: 12px;
+}
+
+@media (min-width: 1080px) {   
+    h1 {
+        text-align: center;
+        font-size: 2em;
+        background-color: rgb(176, 176, 176);
+    }
+    
+    p {
+        background-color: rgb(176, 176, 176);
+        font-size: 1em;
+    }
+}
+
+@media (min-width: 800px) and (max-width: 1080px) {
+    h1 {
+        text-align: center;
+        font-size: 4em;
+        background-color: lightblue;
+    }
+    
+    p {
+        background-color: lightblue;
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 800px) {
+    h1 {
+        text-align: center;
+        font-size: 6em;
+        background-color: greenyellow;
+    }
+    
+    p {
+        background-color: greenyellow;
+        font-size: 3em;
+    }
+}

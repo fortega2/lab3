@@ -1,0 +1,17 @@
+body {
+    font-size: 20px;
+}
+
+h1 {
+    color: darkblue;
+    text-align: center;
+    background-color: aquamarine;
+}
+
+p {
+    color: blue;
+    text-align: left;
+    font-style: italic;
+    border-top: thin solid blue;
+    border-bottom: thin solid blue;
+}
