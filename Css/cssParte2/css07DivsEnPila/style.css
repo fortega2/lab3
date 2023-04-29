@@ -1,0 +1,114 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+	width: 100%;
+}
+
+div.container {
+	background-color: darkcyan;
+	height: 100%;
+	width: 80%;
+	margin: auto;
+	overflow: auto;
+}
+
+div.container div.cajas {
+	height: 200px;
+    width: 40%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 30px;
+}
+
+div.container div.cajas #div1 {
+	display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+	height: 200px;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 16px 8px 2px rgba(0,0,0,0.3);
+    padding-top: 10px;
+}
+
+div.container div.cajas #div2 {
+	display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+    height: 200px;
+    width: 100%;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 10px;
+	margin-top: 30px;
+	background: radial-gradient(orange, white, pink);
+}
+
+div.container div.cajas #div3 {
+    margin: auto;
+	height: 200px;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 10px;
+	margin-top: 30px;
+	background-image: url(./beach-1751455_640.jpg), linear-gradient(90deg, orange, white, pink);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: contain;
+}
+
+div.container div.cajas #div4 {
+	display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    text-align: left;
+    height: 200px;
+    width: 100%;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 10px;
+	margin-top: 30px;
+	padding: 15px 0 0 15px;
+	background: linear-gradient(120deg, pink, white, orange);
+	box-shadow: 16px 8px 2px rgba(0,0,0,0.3);
+}
+
+div.container div.cajas #div5 {
+	display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    text-align: left;
+    height: 200px;
+    width: 100%;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 10px;
+	margin-top: 30px;
+	background: linear-gradient(60deg, orange, white, pink);
+}
+
+@media (min-width: 1080px) {
+	div.container div.cajas #div1 {
+		background-color: lightgray;
+	}
+}
+
+@media (min-width: 600px) and (max-width: 1080px) {
+	div.container div.cajas #div1 {
+		background-color: yellow;
+	}
+}
+
+@media (max-width: 600px) {
+	div.container div.cajas #div1 {
+		background-color: skyblue;
+	}
+}

@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-size: 22px;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.container {
+    /* height: 15%; */
+    width: 80%;
+    margin: auto;
+    background-color: skyblue;
+    overflow: auto;
+}
+
+.cajas {
+    height: 10vh;
+    width: 15%;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 16px 8px 2px rgba(0, 0, 0, 0.3);
+    float: left;
+    font-size: 90%;
+}
+
+#div1 {
+    background: linear-gradient(180deg, orange, white, pink);
+    /* font-size: 150%; */
+}
+
+#div2 {
+    background: radial-gradient(orange, white, pink);
+    /* font-size: 170%; */
+}
+
+#div3 {
+    background-image: url(./beach-1751455_640.jpg), radial-gradient(orange, white, pink);
+    background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 90% 100%, cover;
+}
+
+#div4 {
+    background-image: url(./beach-1751455_640.jpg), radial-gradient(orange, white, pink);
+    background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 50% 100%, cover;
+}

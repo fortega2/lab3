@@ -1,0 +1,106 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-size: 12px;
+}
+
+img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+label {
+    display: block;
+    font-size: 1.7em;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+@media (hover: hover) {
+    .botones-container .botones a:hover {
+        background-color: blue;
+        color: white;
+    }
+}
+
+.container {
+    height: 100%;
+    width: 90%;
+    margin: auto;
+    background-color: skyblue;
+}
+
+.botones-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: start;
+}
+
+.botones-container .botones {
+    height: 60px;
+    width: 250px;
+    font-size: 1.7em;
+    border: none;
+}
+
+.botones-container .botones a {
+    display: block;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    padding-top: 15px;
+    background-color: grey;
+    color: purple;
+}
+
+.botones-container .botones a:active {
+    background-color: yellow;
+}
+
+.inputs {
+    margin: 50px 0 50px 0;
+}
+
+input:focus {
+    background-color: skyblue;
+}
+
+.fotos-container {
+    height: 150px;
+    width: 200px;
+    border: 2px solid black;
+    float: left;
+    transition: width 2s;
+}
+
+.fotos-container:active {
+    height: auto;
+    width: 50%;
+    border: none;
+}
+
+#imagen1 img, #imagen3 img {
+    height: 50%;
+    width: 100%;
+}
+
+#imagen2 img {
+    height: 60%;
+    width: 100%;
+}
+
+#imagen4 img {
+    height: 100%;
+    width: 50%;
+}
