@@ -1,0 +1,107 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-size: 12px;
+    height: 100%;
+    width: 80%;
+    margin: auto;
+}
+
+header {
+    height: 20%;
+    width: 100%;
+    background-color: grey;
+    font-size: 1.5em;
+}
+
+footer {
+    height: 20%;
+    width: 100%;
+    background-color: grey;
+    text-align: center;
+    font-size: 1.5em;
+    padding-top: 90px;
+}
+
+.contenedor-c {
+    display: block;
+    height: 60%;
+    width: 100%;
+    background-color: aqua;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 10%;
+    float: left;
+    background-color: #FD876B;
+    text-align: center;
+}
+
+main {
+    height: 100%;
+    width: 90%;
+    float: left;
+    background-color: #EAEAEA;
+    overflow: auto;
+    padding: 20px;
+    font-size: 1.5em;
+}
+
+#menu {
+    font-size: 2em;
+    padding-top: 50px;
+}
+
+.contenedor-nav {
+    margin: 50px auto;
+    width: 80%;
+    height: 50%;
+    font-size: 1.5em;
+}
+
+.contenedor-nav .ejercicios {
+    width: 100%;
+    height: 25%;
+    background-color: #B7B7B7;
+}
+
+.contenedor-nav .ejercicios a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding-top: 25px;
+    color: #888A8A;
+}
+
+.contenedor-nav .ejercicios a:visited {
+    color: #888A8A;
+}
+
+.contenedor-nav .ejercicios a:hover {
+    background-color: #535353;
+}
+
+@media (max-width: 600px) {
+    body {
+        width: 100%;
+    }
+
+    .contenedor-nav {
+        width: 100%;
+    }
+}

@@ -1,0 +1,133 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-size: 12px;
+    height: 100%;
+    width: 80%;
+    margin: auto;
+    border: 1px solid black;
+}
+
+img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 10%;
+    width: 100%;
+    background-color: #FF5200;
+    font-size: 1.5em;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    flex-wrap: nowrap;
+    height: 10%;
+    width: 100%;
+    background-color: #FFA000;
+    text-align: center;
+}
+
+nav a {
+    display: block;
+    height: 100%;
+    width: 25%;
+    text-align: center;
+    text-decoration: none;
+    color: #888A8A;
+    font-size: 2em;
+    padding-top: 30px;
+}
+
+nav a:visited {
+    color: #888A8A;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    width: 100%;
+    background-color: #FF5200;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+main {
+    overflow: auto;
+    height: 70%;
+    width: 100%;
+    background-color: #BBBBBB;
+    font-size: 2em;
+}
+
+article {
+    height: 100%;
+    width: 295px;
+    float: left;
+    padding: 10px;
+}
+
+#foto-castillo {
+    height: 200px;
+    width: 200px;
+    transform: rotate(10deg);
+}
+
+#foto-cabaña {
+    transform: translate(-50%, -50%);
+}
+
+@media (hover: hover) {
+    nav a:hover {
+        background-color: #535353;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        width: 100%;
+    }
+    
+    article {
+        width: 100%;
+    }
+
+    nav {
+        flex-direction: column;
+        overflow: auto;
+        padding-top: 38px;
+    }
+
+    nav a {
+        height: 100%;
+        width: 100%;
+        font-size: 2.5em;
+        padding-top: 0;
+    }
+
+    #foto-cabaña {
+        transform: translate(0, -50%);
+    }
+}
