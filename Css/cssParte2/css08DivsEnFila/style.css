@@ -16,7 +16,6 @@ img {
 }
 
 .container {
-    /* height: 15%; */
     width: 80%;
     margin: auto;
     background-color: skyblue;
@@ -24,24 +23,29 @@ img {
 }
 
 .cajas {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 10vh;
-    width: 15%;
+    width: 220px;
     margin: 10px;
     border: 1px solid black;
     border-radius: 10px;
     box-shadow: 16px 8px 2px rgba(0, 0, 0, 0.3);
     float: left;
-    font-size: 90%;
+    text-align: center;
+    font-weight: bold;
+    flex-wrap: wrap;
+    font-size: 170%;
 }
 
 #div1 {
     background: linear-gradient(180deg, orange, white, pink);
-    /* font-size: 150%; */
 }
 
 #div2 {
     background: radial-gradient(orange, white, pink);
-    /* font-size: 170%; */
 }
 
 #div3 {
