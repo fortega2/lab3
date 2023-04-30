@@ -1,0 +1,93 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-size: 12px;
+}
+
+body {
+    background-color: blue;
+}
+
+img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+.container {
+    margin-left: 5%;
+    margin-right: 15%;
+    background-color: lightgoldenrodyellow;
+}
+
+.contenedor-modal {
+    position: fixed;
+    height: 50%;
+    width: 50%;
+    top: 20%;
+    left: 25%;
+    opacity: 0.5;
+    overflow-y: auto;
+    visibility: visible;
+    z-index: 10;
+    background-color: blue;
+    color: white;
+    padding: 30px;
+    font-size: 1.3em;
+    border-top-left-radius: 20px;
+}
+
+.contenedor-relativo1 {
+    width: 80%;
+    height: 100px;
+    margin-top: 10px;
+    padding: 10px 0 0 10px;
+    background-color: green;
+}
+
+.contenedor-relativo2 {
+    width: 50%;
+    margin-top: 30px;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-left: 20%;
+    padding: 10px 10px 10px 10px;
+    background-color: yellow;
+}
+
+.contenedor-relativo3 {
+    height: 120px;
+    width: 50%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 30%;
+    padding: 10px 10px 10px 10px;
+    background-color: orange;
+    overflow: auto;
+}
+
+.contenedor-imagen {
+    height: 50%;
+    width: 50%;
+    margin-top: 30px;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    background-color: yellow;
+}
+
+.contenedor-imagen img {
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    padding: 1%;
+}
