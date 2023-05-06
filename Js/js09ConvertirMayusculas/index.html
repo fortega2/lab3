@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 09 - Convertir A Mayúsculas</title>
+    <style>
+        .container {
+            height: 100px;
+            width: 600px;
+            padding: 20px 0 20px 60px;
+            background-color: skyblue;
+        }
+
+        .contenedor-inputs {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        input {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="contenedor-inputs">
+            <label for="nombre">Ingrese nombre:</label>
+            <input type="text" name="nombre" id="nombre">
+        </div>
+        <div class="contenedor-inputs">
+            <label for="apellido">Ingrese el apellido:</label>
+            <input type="text" name="apellido" id="apellido">
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById("nombre").onchange = function() {
+        this.value = this.value.toUpperCase();
+    }
+
+    document.getElementById("apellido").onchange = function() {
+        this.value = this.value.toUpperCase();
+    }
+</script>
+</html>

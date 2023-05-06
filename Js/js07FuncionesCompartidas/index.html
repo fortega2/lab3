@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 07 - Funciones Compartidas</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-size: 12px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
+            height: 40%;
+            width: 50%;
+            margin: 3em auto;
+            background-color: #D6D6D6;
+        }
+
+        input {
+            height: 10%;
+            width: 80%;
+            text-align: right;
+            margin-top: 1em;
+            padding-right: 0.8em;
+        }
+
+        .contenedor-numeros {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            text-align: center;
+            height: 47%;
+            width: 80%;
+            background-color: #A2CEDD;
+        }
+
+        .contenedor-botones {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            text-align: center;
+            height: 35%;
+            width: 80%;
+            background-color: #EEF8D8;
+            padding-top: 0.6em;
+        }
+
+        .numeros {
+            height: 15%;
+            width: 25%;
+            margin: 1em;
+            cursor: pointer;
+        }
+
+        .botones-acion {
+            height: 40%;
+            width: 40%;
+            margin-right: 0.3em;
+            cursor: pointer;
+        }
+
+        @media (max-width: 799px) {
+            .container {
+                width: 70%;
+            }
+
+            .numeros {
+                margin: 0.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="valor">
+        <div class="contenedor-numeros">
+            <button onclick="agregarNumero('1')" class="numeros">1</button>
+            <button onclick="agregarNumero('2')" class="numeros">2</button>
+            <button onclick="agregarNumero('3')" class="numeros">3</button>
+            <button onclick="agregarNumero('4')" class="numeros">4</button>
+            <button onclick="agregarNumero('5')" class="numeros">5</button>
+            <button onclick="agregarNumero('6')" class="numeros">6</button>
+            <button onclick="agregarNumero('7')" class="numeros">7</button>
+            <button onclick="agregarNumero('8')" class="numeros">8</button>
+            <button onclick="agregarNumero('9')" class="numeros">9</button>
+        </div>
+        <div class="contenedor-botones">
+            <button onclick="sumarAcumulador()" class="botones-acion">+</button>
+            <button onclick="mostratAcumudalor()" class="botones-acion">Mostrar acumulador</button>
+            <button onclick="borrarAcumulador()" class="botones-acion">Borrar acumulador</button>
+            <button onclick="borrarDisplay()" class="botones-acion">Borrar display</button>
+        </div>
+    </div>
+</body>
+<script>
+    var acumudalor = 0;
+    var input = document.getElementById('valor');
+
+    function agregarNumero(numero) {
+        input.value += numero;
+    }
+
+    function borrarDisplay() {
+        input.value = '';
+    }
+
+    function sumarAcumulador() {
+        if (input.value !== '') {
+            acumudalor += parseInt(input.value);
+            borrarDisplay();
+        }
+    }
+
+    function borrarAcumulador() {
+        acumudalor = 0;
+    }
+
+    function mostratAcumudalor() {
+        alert('Acumulador = ' + acumudalor);
+    }
+</script>
+</html>

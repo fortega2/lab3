@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 08 - Operaciones Entre Inputs</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-size: 12px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 70%;
+            margin: auto;
+        }
+
+        .titulo {
+            background-color: #DB5741;
+            height: 10%;
+            width: 100%;
+            padding: 0.5em;
+        }
+
+        h1 {
+            font-size: 2.3em;
+        }
+
+        .contenedor-entradas {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            text-align: left;
+            padding: 2em 0.5em 0.5em 0.5em;
+            background-color: lightgray;
+        }
+
+        .contenedor-inputs {
+            width: 100%;
+            display: block;
+            margin-bottom: 2em;
+        }
+
+        .contenedor-botones {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: flex-start;
+            text-align: center;
+            width: 100%;
+        }
+
+        .botones {
+            height: 2em;
+            width: 30%;
+            background-color: bisque;
+            cursor: pointer;
+        }
+
+        input {
+            width: 400px;
+            margin-left: 1em;
+            height: 2em;
+        }
+
+        label {
+            font-size: 1.5em;
+        }
+
+        #resultado {
+            margin-left: 0.8em;
+        }
+
+        @media (max-width: 718px) {
+            input {
+                display: block;
+                width: 100%;
+                margin: 0;
+            }
+
+            #resultado {
+            margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="titulo">
+            <h1>Introducir un valor en los cuadros de texto y luego pulsar el botón para ejecutar la función correspondiente</h1>
+        </div>
+        <div class="contenedor-entradas">
+            <div class="contenedor-inputs">
+                <label for="entrada1">Entrada 1:</label>
+                <input type="text" value="0" name="entrada1" id="entrada1">
+            </div>
+            <div class="contenedor-inputs">
+                <label for="entrada2">Entrada 2:</label>
+                <input type="text" value="0" name="entrada2" id="entrada2">
+            </div>
+            <div class="contenedor-inputs">
+                <label for="entrada3">Entrada 3:</label>
+                <input type="text" value="0" name="entrada3" id="entrada3">
+            </div>
+            <div class="contenedor-inputs">
+                <label for="resultado">Resultado:</label>
+                <input type="text" name="resultado" id="resultado">
+            </div>
+            <div class="contenedor-botones">
+                <button class="botones" id="sumar">Suma</button>
+                <button class="botones" id="promedio">Promedio</button>
+                <button class="botones" id="mayor">Mayor</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var entrada1 = document.getElementById("entrada1")
+    var entrada2 = document.getElementById("entrada2")
+    var entrada3 = document.getElementById("entrada3")
+    var botonSumar = document.getElementById("sumar");
+    var botonPromedio = document.getElementById("promedio");
+    var botonMayor = document.getElementById("mayor");
+    var resultado = document.getElementById("resultado")
+
+    botonSumar.onclick = () => {
+        resultado.value = parseInt(entrada1.value) + parseInt(entrada2.value) + parseInt(entrada3.value);
+    }
+
+    botonPromedio.onclick = () => {
+        resultado.value = (parseInt(entrada1.value) + parseInt(entrada2.value) + parseInt(entrada3.value)) / 3;
+    }
+
+    botonMayor.onclick = () => {
+        if (parseInt(entrada1.value) > parseInt(entrada2.value) && parseInt(entrada1.value) > parseInt(entrada3.value)) {
+            resultado.value = parseInt(entrada1.value);
+        } else if (parseInt(entrada2.value) > parseInt(entrada1.value) && parseInt(entrada2.value) > parseInt(entrada3.value)) {
+            resultado.value = parseInt(entrada2.value);
+        } else {
+            resultado.value = parseInt(entrada3.value);
+        }
+    }
+</script>
+</html>
