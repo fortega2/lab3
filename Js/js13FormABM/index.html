@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 13 - Forms ABM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.7em;
+        }
+
+        label, input {
+            display: block;
+        }
+
+        button {
+            padding: 0.4em;
+            cursor: pointer;
+        }
+
+        .fondo {
+            opacity: 0.5;
+        }
+
+        .ventana-modular {
+            position: fixed;
+            top: 30%;
+            left: 25%;
+            height: 38%;
+            width: 48%;
+            background-color: lightgreen;
+        }
+
+        .ventana-formulario {
+            display: flex;
+            justify-content: flex-start;
+            align-content: flex-start;
+            flex-direction: column;
+            position: relative;
+            height: 60%;
+            width: 60%;
+            padding: 0.5em;
+            background-color: aqua;
+        }
+
+        .formulario {
+            margin-left: 3em;
+        }
+
+        .botones {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-content: center;
+            position: absolute;
+            top: 130%;
+            width: 135%;
+        }
+
+        @media screen and (max-width: 1493px) {
+            h1 {
+                font-size: 2em;
+            }
+        }
+
+        @media screen and (max-width: 1024px) {
+            h1 {
+                font-size: 1.7em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fondo">
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppp awd rgdrgdrg dr</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+        <p>awdawdjkalkwjdlk awjdklawj dkljawkld jawkld jawkldj alwkjdaklwdj lakwdj awkdjkl awrgdr gdrgdry dr opsi spoéfi sepóf jksdrlñgk señfkwas ñldkawñlldrñfg kdrlñgkdr lgkdrñgdrogkdrgodrñglkdrlñpppppp pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp</p>
+    </div>
+    <div class="ventana-modular">
+        <div class="ventana-formulario">
+            <h1>FORMULARIO ABM</h1>
+            <div class="formulario">
+                <form action="" method="post" id="formulario">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" name="apellido" id="apellido" required="true">
+    
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" name="nombre" id="nombre" required="true">
+    
+                    <label for="saldo">Saldo:</label>
+                    <input type="number" name="saldo" id="saldo" required="true" title="El saldo debe ser mayor o igual a 100">
+
+                    <div class="botones">
+                        <button type="reset" id="reset" disabled="true">Blanquear</button>
+                        <button type="button" id="alta" disabled="true">Alta</button>
+                        <button type="button" id="modi" disabled="true">Modi</button>
+                        <button type="button" id="baja" disabled="true">Baja</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        const formulario = document.getElementById("formulario");
+        
+        const btnReset = document.getElementById("reset");
+        const btnAlta = document.getElementById("alta");
+        const btnModi = document.getElementById("modi");
+        const btnBaja = document.getElementById("baja");
+
+        const inputApellido = document.getElementById("apellido");
+        const inputNombre = document.getElementById("nombre");
+        const inputSaldo = document.getElementById("saldo");
+
+        inputApellido.onkeyup = function() {
+            if (inputApellido.checkValidity()) {
+                btnReset.disabled = false;
+            } else {
+                btnReset.disabled = true;
+            }
+
+            if (formulario.checkValidity() && inputSaldo.value >= 100) {
+                btnAlta.disabled = false;
+                btnModi.disabled = false;
+                btnBaja.disabled = false;
+            } else {
+                btnAlta.disabled = true;
+                btnModi.disabled = true;
+                btnBaja.disabled = true;
+            }
+        }
+
+        inputNombre.onkeyup = function() {
+            if (inputNombre.checkValidity()) {
+                btnReset.disabled = false;
+            } else {
+                btnReset.disabled = true;
+            }
+
+            if (formulario.checkValidity() && inputSaldo.value >= 100) {
+                btnAlta.disabled = false;
+                btnModi.disabled = false;
+                btnBaja.disabled = false;
+            } else {
+                btnAlta.disabled = true;
+                btnModi.disabled = true;
+                btnBaja.disabled = true;
+            }
+        }
+
+        inputSaldo.onkeyup = function() {
+            if (inputSaldo.checkValidity()) {
+                btnReset.disabled = false;
+            } else {
+                btnReset.disabled = true;
+            }
+
+            if (formulario.checkValidity() && inputSaldo.value >= 100) {
+                btnAlta.disabled = false;
+                btnModi.disabled = false;
+                btnBaja.disabled = false;
+            } else {
+                btnAlta.disabled = true;
+                btnModi.disabled = true;
+                btnBaja.disabled = true;
+            }
+        }
+    </script>
+</body>
+</html>

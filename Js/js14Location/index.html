@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 14 - Location</title>
+    <style>
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button type="button" id="yt">Youtube</button>
+    <button type="button" id="source-force">Source Force</button>
+    <button type="button" id="gmail">Gmail</button>
+    <script>
+        document.getElementById("yt").onclick = function() {
+            location.href = "https://www.youtube.com";
+        }
+        document.getElementById("source-force").onclick = function() {
+            location.href = "https://sourceforge.net";
+        }
+        document.getElementById("gmail").onclick = function() {
+            location.href = "https://gmail.com";   
+        }
+    </script>
+</body>
+</html>

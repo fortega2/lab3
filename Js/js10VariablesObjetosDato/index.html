@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 10 - Variables Objetos Dato</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        label {
+            display: block;
+            margin-top: 0.3em;
+        }
+
+        input {
+            display: block;
+        }
+
+        .formulario {
+            margin: 1em auto;
+            padding: 0.5em;
+            height: 200px;
+            width: 90%;
+            background-color: skyblue;
+        }
+
+        .control {
+            margin: 1em auto;
+            padding: 0.5em;
+            height: 70px;
+            width: 90%;
+            background-color: lightyellow;
+        }
+
+        #crear-persona {
+            margin-top: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Consignas del ejercicio</h1>
+    <h2>Declarar y hacer uso de Objetos de dato (datos de tipo objeto)</h2>
+    <h2>Cargar 2 personas a un array por programa</h2>
+    <h2>Dejar de usar la función prompt() para el ingreso de datos. Armar un contenedor para el ingreso de datos desde la consola (solo inputs sin formulario)</h2>
+    <h2>Dejar de usar documento.write() y escribir el contenido dentro de un elemento html (puede ser un div)</h2>
+    <h2>Dos botones para llamar a dos funciones. Una para cargar un nuevo objeto de dato por teclado y otra para mostrar en formato de tabla el array completo de elementos con su longitud</h2>
+    <h2>Un tercer procedimiento para ocultar el elemento de presentación (usando el parámetro de display: none)</h2>
+    <div class="formulario">
+        <h1>Adicionar persona</h1>
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre">
+        <label for="apellido">Apellido:</label>
+        <input type="text" name="apellido" id="apellido">
+        <label for="fecha-nacimiento">Fecha de nacimiento:</label>
+        <input type="text" name="fecha-nacimiento" id="fecha-nacimiento">
+        <button id="crear-persona">Crear persona</button>
+    </div>
+    <div class="control">
+        <h1>Control</h1>
+        <button id="lista-persona">Lista personas</button>
+        <button id="ocultar-presentacion">Ocultar presentación</button>
+    </div>
+    <div id="presentacion" style="display: none;"></div>
+    <script>
+        var btnCrearPersona = document.getElementById("crear-persona");
+        var btnListaPersona = document.getElementById("lista-persona");
+        var btnOcultarPresentacion = document.getElementById("ocultar-presentacion");
+        
+        var inputApellido = document.getElementById("apellido");
+        var inputNombre = document.getElementById("nombre");
+        var inputFechaNacimiento = document.getElementById("fecha-nacimiento");
+        
+        var presentacion = document.getElementById("presentacion");
+        
+        var objetoPersonas = [
+            {
+                nombre: "Pablo",
+                apellido: "Galdi",
+                fechaNacimiento: "01/07/1956"
+            },
+            {
+                nombre: "Jose",
+                apellido: "Witt",
+                fechaNacimiento: "17/01/1985"
+            }
+        ]
+
+        var texto = "";
+        texto += "<h1>Presentación</h1>";
+        texto += "<table style='border-collapse: collapse; border: solid;'>";
+        
+        objetoPersonas.forEach(function(item, indice) {
+            texto += "<tr>";
+            texto += "<td style='border: 3px solid black'>" + item.nombre + "</td>";
+            texto += "<td style='border: 3px solid black'>" + item.apellido + "</td>";
+            texto += "<td style='border: 3px solid black'>" + item.fechaNacimiento + "</td>";
+            texto += "</tr>";
+        })
+
+        texto += "</table>";
+        texto += "<h4>Longitud del arreglo de objetos: " + objetoPersonas.length + "</h4>";
+
+        presentacion.innerHTML = texto;
+
+        btnCrearPersona.onclick = function() {
+            objetoPersonas.push({
+                nombre: inputNombre.value,
+                apellido: inputApellido.value,
+                fechaNacimiento: inputFechaNacimiento.value
+            })
+            inputApellido.value = "";
+            inputNombre.value = "";
+            inputFechaNacimiento.value = "";
+            
+            texto = "";
+            presentacion.innerHTML = texto;
+
+            texto += "<h1>Presentación</h1>";
+            texto += "<table style='border-collapse: collapse; border: 3px solid black;'>";
+            objetoPersonas.forEach(function(item) {
+                texto += "<tr>";
+                texto += "<td style='border: 3px solid black'>" + item.nombre + "</td>";
+                texto += "<td style='border: 3px solid black'>" + item.apellido + "</td>";
+                texto += "<td style='border: 3px solid black'>" + item.fechaNacimiento + "</td>";
+                texto += "</tr>";
+            })
+            texto += "</table>";
+            texto += "<h4>Longitud del arreglo de objetos: " + objetoPersonas.length + "</h4>";
+            presentacion.innerHTML = texto;
+        }
+
+        btnOcultarPresentacion.onclick = function() {
+            presentacion.style.display = "none";
+        }
+
+        btnListaPersona.onclick = function() {
+            presentacion.style.display = "block";
+        }
+    </script>
+</body>
+</html>

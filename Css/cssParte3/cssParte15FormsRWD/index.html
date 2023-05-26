@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 15 - Forms RWD</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-size: 12px;
+        }
+
+        label {
+            display: block;
+            font-size: 2em;
+        }
+
+        input {
+            display: block;
+            margin-top: 0.5em;
+        }
+
+        select {
+            margin-top: 0.5em;
+        }
+
+        p {
+            font-size: 2.2em;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 10%;
+            width: 100%;
+            text-align: center;
+            background-color: #046B7E;
+            font-size: 2em;
+            padding-top: 0.5em;
+        }
+
+        footer {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 10%;
+            width: 100%;
+            text-align: center;
+            background-color: #046B7E;
+            font-size: 2em;
+            padding-top: 0.8em;
+        }
+
+        .formulario {
+            height: 80%;
+            max-height: 80%;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-content: flex-start;
+            flex-wrap: wrap;
+            overflow: auto;
+            background-color: #BEBEBE;
+        }
+
+        .cajas {
+            height: 26.65%;
+            width: 20%;
+            border: 1px solid black;
+            background-color: #BEBEBE;
+            padding: 1em;
+        }
+
+        .botones {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-content: flex-start;
+            flex-wrap: wrap;
+            height: 20%;
+            width: 100%;
+            background-color: #646464;
+            border: 1px solid black;
+        }
+
+        button {
+            height: 80%;
+            width: 40%;
+            background-color: #BEBEBE;
+            border: 1px solid black;
+            margin-top: 0.5em;
+            font-size: 3em;
+            cursor: pointer;
+        }
+
+        #campoDeshabilitado {
+            background-color: #E0E2E2;
+        }
+
+        #si, #no {
+            display: inline;
+        }
+
+        @media (max-width: 940px) {
+            .cajas {
+                width: 33.3%;
+            }
+        }
+
+        @media (max-width: 565px) {
+            .cajas {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Formulario</h1>
+    </header>
+    <form action="respuesta-formulario.html" method="post" class="formulario">
+        <div class="cajas">
+            <label for="apellido">1 Apellido:</label>
+            <input type="text" name="apellido" id="apellido">
+        </div>
+        <div class="cajas">
+            <label for="nombre">2 Nombres:</label>
+            <input type="text" name="nombre" id="nombre">
+        </div>
+        <div class="cajas">
+            <label for="contraseña">3 Contraseña:</label>
+            <input type="password" name="contraseña" id="contraseña">
+        </div>
+        <div class="cajas">
+            <label for="campoDeshabilitado">4 Campo deshabilitado:</label>
+            <input type="text" name="campoDeshabilitado" id="campoDeshabilitado" disabled="true" value="valor deshabilitado">
+        </div>
+        <div class="cajas">
+            <label for="fechaHora">5 Fecha y Hora:</label>
+            <input type="date" name="fechaHora" id="fechaHora">
+        </div>
+        <div class="cajas">
+            <label for="dni">6 DNI:</label>
+            <input type="number" name="dni" id="dni">
+        </div>
+        <div class="cajas">
+            <p style="font-weight: bold;">7 Actividades extracurriculares:</p>
+            <label for="musica">Música:</label>
+            <input type="checkbox" name="musica" id="musica">
+            <label for="pinturaArtistica">Pintura Artística</label>
+            <input type="checkbox" name="pinturaArtistica" id="pinturaArtistica">
+        </div>
+        <div class="cajas">
+            <p>8 Sexo:</p>
+            <label for="masculino">Masculino:</label>
+            <input type="radio" name="sexo" id="masculino">
+            <label for="femenino">Femenino:</label>
+            <input type="radio" name="sexo" id="femenino">
+        </div>
+        <div class="cajas">
+            <p style="font-weight: bold; font-size: 4em;">9 Vacío</p>
+        </div>
+        <div class="cajas">
+            <label for="estudios">10 Estudios cursados:</label>
+            <select name="estudios" id="estudios">
+                <option value="primario">Primario</option>
+                <option value="secundario">Secundario</option>
+                <option value="terciario">Terciario</option>
+                <option value="universitario">Universitario</option>
+                <option value="master">Master</option>
+            </select>
+        </div>
+        <div class="cajas">
+            <label for="areaDesempenio">11 Área de desempeño:</label>
+            <select name="areaDesempenio" id="areaDesempenio">
+                <option value="administrativo">Administrativo</option>
+            </select>
+        </div>
+        <div class="cajas">
+            <label for="turno">12 Turno:</label>
+            <select name="turno" id="turno">
+                <option value="manana">Mañana</option>
+                <option value="tarde">Tarde</option>
+                <option value="noche">Noche</option>
+            </select>
+        </div>
+        <div class="cajas">
+            <label for="conduce">13 Conduce:</label>
+            <input type="radio" name="conduce" id="si">
+            <p style="font-size: 1.3em; display: inline;">SI</p>
+            <input type="radio" name="conduce" id="no">
+            <p style="font-size: 1.3em; display: inline;">NO</p>
+        </div>
+        <div class="botones">
+            <button type="submit">Enviar</button>
+            <button type="reset">Reset</button>
+        </div>
+    </form>
+    <footer>
+        <h1>Píe de formulario</h1>
+    </footer>
+</body>
+
+</html>

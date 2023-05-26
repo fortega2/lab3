@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 16 - Creación Objetos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-size: 16px
+        }
+
+        button {
+            height: 30px;
+            width: 60px;
+            margin: 0 0.06em 0 0;
+            background-color: #A8D2E4;
+            color: black;
+            cursor: pointer;
+        }
+
+        .container {
+            height: 50%;
+            width: 60%;
+            margin: 14em auto;
+            background-color: #FBFCDB;
+            overflow: auto;
+        }
+
+        .elemento-creado {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100px;
+            width: 55%;
+            margin-left: 3em;
+            background-color: #A8D2E4;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <button id="crear">Crear</button>
+    <button id="limpiar">Limpiar</button>
+    <button id="info">Info</button>
+    <div class="container" id="contenedor"></div>
+
+    <script>
+        const btnCrear = document.getElementById("crear");
+        const btnLimpiar = document.getElementById("limpiar");
+        const btnInfo = document.getElementById("info");
+
+        const divContenedor = document.getElementById("contenedor");
+
+        btnCrear.onclick = () => {
+            let ojtDiv = document.createElement("div");
+            let objH1 = document.createElement("h1");
+            objH1.innerText = "Elemento creado: " + (divContenedor.childNodes.length + 1);
+            ojtDiv.className = "elemento-creado"
+            ojtDiv.appendChild(objH1);
+            divContenedor.appendChild(ojtDiv);
+        }
+
+        btnLimpiar.onclick = () => {
+            while (divContenedor.childNodes.length > 0) {
+                divContenedor.removeChild(divContenedor.childNodes[0]);
+            }
+
+            // for (let i = divContenedor.childNodes.length - 1; i >= 0; i--) {
+            //     divContenedor.removeChild(divContenedor.childNodes[i]);
+            // }
+        }
+
+        btnInfo.onclick = () => {
+            alert("Longitud del chilNodes: " + divContenedor.childNodes.length);
+        }
+    </script>
+</body>
+</html>
