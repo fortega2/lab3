@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Especiales 04 - Tabla Formulario</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .container-foco {
+            height: 100%;
+            width: 100%;
+            pointer-events: auto;
+            opacity: 1;
+        }
+
+        .container-sin-foco {
+            height: 100%;
+            width: 100%;
+            pointer-events: none;
+            opacity: 0.3;
+            user-select: none;
+        }
+
+        .ventana-modal-sin-foco {
+            display: none;
+        }
+
+        .ventana-modal-con-foco {
+            position: fixed;
+            top: 28%;
+            left: 20%;
+            height: 60%;
+            width: 70%;
+        }
+
+        .encabezado-modal {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            height: 10%;
+            width: 100%;
+            background-color: #A6A8A6;
+        }
+
+        #encabezado {
+            height: 100%;
+            width: 90%;
+            padding: 0.2em;
+        }
+
+        #boton-cerrar-ventana-modal {
+            height: 100%;
+            width: 10%;
+            background-color: #B9B9B8;
+            border: none;
+            font-size: 1em;
+            color: red;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        header {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: center;
+            height: 10%;
+            width: 100%;
+            background-color: #F2F2D8;
+        }
+
+        footer {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 10%;
+            width: 100%;
+            background-color: #F2F2D8;
+        }
+
+        .contenedor-botones {
+            height: 100%;
+            width: 100%;
+            margin-left: 5%;
+        }
+
+        #titulo {
+            margin-left: 35%;
+        }
+
+        button {
+            margin-top: 0.2em;
+            height: 90%;
+            width: 32%;
+            background-color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .contenedor-tabla {
+            height: 80%;
+            width: 100%;
+            overflow-y: scroll;
+            background-color: #D1D1D1;
+        }
+
+        table {
+            height: 900px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            height: 10%;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            background-color: #FF7E5B;
+        }
+
+        tfoot {
+            height: 10%;
+            width: 100%;
+            position: sticky;
+            bottom: 0;
+            background-color: #FF7E5B;
+        }
+
+        tbody {
+            width: 100%;
+            background-color: #A6A7A5;
+        }
+
+        tbody > tr:nth-child(even) {
+            background-color: #919191;
+        }
+
+        tbody > tr > td {
+            padding-left: 0.2em;
+            font-size: 1.3em;
+        }
+
+        /* Ventan modal */
+        label {
+            display: block;
+            font-size: 2em;
+        }
+
+        input {
+            width: 80%;
+            display: block;
+            font-size: 2em;
+            margin-top: 0.5em;
+        }
+
+        select {
+            display: block;
+            /* height: 2em; */
+            width: 80%;
+            font-size: 2.3em;
+            margin-top: 0.2em;
+        }
+
+        .button {
+            height: 60%;
+            width: 60%;
+            margin: 1em 0 0 3em;
+            font-size: 2em;
+            cursor: pointer;
+            background-color: #EBEBEB;
+        }
+
+        .header, .footer {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 10%;
+            width: 100%;
+            background-color: #AD3528;
+            color: white;
+        }
+
+        form {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+            align-content: flex-start;
+            flex-wrap: wrap;
+            height: 80%;
+            width: 100%;
+            background-color: #F2F2D8;
+        }
+
+        .campos-formulario {
+            height: 33.4%;
+            width: 50%;
+            padding: 3em 0 3em 3em;
+        }
+
+        @media screen and (max-width: 1180px) {
+            label {
+                font-size: 1.5em;
+            }
+
+            input {
+                font-size: 2em;
+            }
+
+            select {
+                font-size: 1.5em;
+            }
+
+            .button {
+                height: 70%;
+                font-size: 1.3em;
+            }
+        }
+
+        @media screen and (max-width: 790px) {
+            label {
+                font-size: 1em;
+            }
+
+            input {
+                font-size: 1.5em;
+            }
+
+            select {
+                font-size: 1em;
+            }
+
+            .button {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-foco" id="container-principal">
+        <header>
+            <h1 id="titulo">Articulos</h1>
+            <div class="contenedor-botones">
+                <button type="button" id="cargar-datos">Cargar datos</button>
+                <button type="button" id="vaciar-datos">Vaciar datos</button>
+                <button type="button" id="cargar-form">Cargar form</button>
+            </div>
+        </header>
+        <div class="contenedor-tabla">
+            <table>
+                <thead>
+                    <tr>
+                      <th>CÓDIGO ARTÍCULO</th>
+                      <th>FAMILIA</th>
+                      <th>UM</th>
+                      <th>DESCRIPCIÓN</th>
+                      <th>FECHA ALTA</th>
+                      <th>SALDO STOCK</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-datos"></tbody>
+                <tfoot>
+                    <tr>
+                        <th>CÓDIGO ARTÍCULO</th>
+                        <th>FAMILIA</th>
+                        <th>UM</th>
+                        <th>DESCRIPCIÓN</th>
+                        <th>FECHA ALTA</th>
+                        <th>SALDO STOCK</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <footer>
+            <h1>Pie</h1>
+        </footer>
+    </div>
+    <div class="ventana-modal-sin-foco" id="container-ventana-modal">
+        <div class="encabezado-modal">
+            <h1 id="encabezado">Encabezado modal</h1>
+            <button id="boton-cerrar-ventana-modal">X</button>
+        </div>
+        <!-- Form modal -->
+        <div class="header">
+            <h1>Formulario para ALTA - Maestro de Artículos</h1>
+        </div>
+        <form action="respuesta.html" method="post">
+            <div class="campos-formulario">
+                <label for="cod-articulo">Código Artículo:</label>
+                <input type="text" name="cod-articulo" id="cod-articulo" required="true">
+            </div>
+    
+            <div class="campos-formulario">
+                <label for="articulos">Familia de Artículo:</label>
+                <select name="articulos" id="articulos" required="true"></select>
+            </div>
+    
+            <div class="campos-formulario">
+                <label for="descripcion">Descripción:</label>
+                <input type="text" name="descripcion" id="descripcion" required="true">
+            </div>
+    
+            <div class="campos-formulario">
+                <label for="fecha-alta">Fecha alta:</label>
+                <input type="date" name="fecha-alta" id="fecha-alta" required="true">
+            </div>
+    
+            <div class="campos-formulario">
+                <label for="saldo-stock">Saldo Stock:</label>
+                <input type="number" name="saldo-stock" id="saldo-stock" value="0" required="true">
+            </div>
+    
+            <div class="campos-formulario">
+                <button class="button" type="submit">Enviar</button>
+            </div>
+        </form>
+        <div class="footer">
+            <h1>Pie de formulario</h1>
+        </div>    
+    </div>
+
+    <script src="../jquery-3.7.0.js"></script>
+    <script>
+        $(document).ready(() => {
+            let datosJSon;
+            
+            $.getJSON('../esp02TablaVariableArregloDeObjetos/datos-tabla.json', (json) => {
+                datosJSon = json;
+            })
+
+            $.getJSON('../esp01FormVaribleArregloDeObjetos/datos-select.json', (objJson) => {
+                const datosSelect = objJson;
+
+                datosSelect.forEach((valor) => {
+                let objOption = document.createElement('option');
+                objOption.setAttribute('value', valor.codigo);
+                objOption.innerHTML = valor.descripcion;
+                $('#articulos').append(objOption);
+                })
+            })
+
+            $('#cargar-datos').click(() => {
+                agregarDatos(datosJSon);
+            })
+
+            $('#vaciar-datos').click(() => {
+                $('#tbody-datos').empty();
+            })
+
+            $('#cargar-form').click(() => {
+                $('#container-principal').removeClass('container-foco').addClass('container-sin-foco');
+                $('#container-ventana-modal').removeClass('ventana-modal-sin-foco').addClass('ventana-modal-con-foco');
+            })
+
+            $('#boton-cerrar-ventana-modal').click(() => {
+                $('#container-principal').removeClass('container-sin-foco').addClass('container-foco');
+                $('#container-ventana-modal').removeClass('ventana-modal-con-foco').addClass('ventana-modal-sin-foco');
+            })
+        })
+
+        function agregarDatos(arrayDatosJson) {
+            arrayDatosJson.forEach(element => {
+                let objTr = document.createElement('tr');
+                let objTd1 = document.createElement('td');                
+                let objTd2 = document.createElement('td');                
+                let objTd3 = document.createElement('td');                
+                let objTd4 = document.createElement('td');                
+                let objTd5 = document.createElement('td');                
+                let objTd6 = document.createElement('td');
+                
+                objTd1.innerText = element.codigoArticulo;
+                objTd2.innerText = element.familia;
+                objTd3.innerText = element.um;
+                objTd4.innerText = element.descriopcion;
+                objTd5.innerText = element.fechaAlta;
+                objTd6.innerText = element.saldoStock;
+
+                objTr.appendChild(objTd1);
+                objTr.appendChild(objTd2);
+                objTr.appendChild(objTd3);
+                objTr.appendChild(objTd4);
+                objTr.appendChild(objTd5);
+                objTr.appendChild(objTd6);
+
+
+                $('#tbody-datos').append(objTr);
+            });
+        }
+    </script>
+</body>
+</html>

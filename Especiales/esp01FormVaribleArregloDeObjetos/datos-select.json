@@ -1,0 +1,22 @@
+[
+    {
+        "descripcion": "Conservas de fruta",
+        "codigo": "0"
+    },
+    {
+        "descripcion": "Conservas de pescado",
+        "codigo": "1"
+    },
+    {
+        "descripcion": "Conservas de verdura",
+        "codigo": "2"
+    },
+    {
+        "descripcion": "Especias",
+        "codigo": "3"
+    },
+    {
+       "descripcion": "Frutos secos",
+       "codigo": "4"
+    }
+]

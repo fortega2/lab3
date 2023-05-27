@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Especiales 02 - Tabla Variable Arreglo De Objetos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        header {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: center;
+            height: 10%;
+            width: 100%;
+            background-color: #F2F2D8;
+        }
+
+        footer {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 10%;
+            width: 100%;
+            background-color: #F2F2D8;
+        }
+
+        .contenedor-botones {
+            height: 100%;
+            width: 100%;
+            margin-left: 5%;
+        }
+
+        #titulo {
+            margin-left: 35%;
+        }
+
+        button {
+            margin-top: 0.2em;
+            height: 90%;
+            width: 49%;
+            background-color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .contenedor-tabla {
+            height: 80%;
+            width: 100%;
+            overflow-y: scroll;
+            background-color: #D1D1D1;
+        }
+
+        table {
+            height: 900px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            height: 10%;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            background-color: #FF7E5B;
+        }
+
+        tfoot {
+            height: 10%;
+            width: 100%;
+            position: sticky;
+            bottom: 0;
+            background-color: #FF7E5B;
+        }
+
+        tbody {
+            width: 100%;
+            background-color: #A6A7A5;
+        }
+
+        tbody > tr:nth-child(even) {
+            background-color: #919191;
+        }
+
+        tbody > tr > td {
+            padding-left: 0.2em;
+            font-size: 1.3em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id="titulo">Articulos</h1>
+        <div class="contenedor-botones">
+            <button type="button" id="cargar-datos">Cargar datos</button>
+            <button type="button" id="vaciar-datos">Vaciar datos</button>
+        </div>
+    </header>
+    <div class="contenedor-tabla">
+        <table>
+            <thead>
+                <tr>
+                  <th>CÓDIGO ARTÍCULO</th>
+                  <th>FAMILIA</th>
+                  <th>UM</th>
+                  <th>DESCRIPCIÓN</th>
+                  <th>FECHA ALTA</th>
+                  <th>SALDO STOCK</th>
+                </tr>
+            </thead>
+            <tbody id="tbody-datos"></tbody>
+            <tfoot>
+                <tr>
+                    <th>CÓDIGO ARTÍCULO</th>
+                    <th>FAMILIA</th>
+                    <th>UM</th>
+                    <th>DESCRIPCIÓN</th>
+                    <th>FECHA ALTA</th>
+                    <th>SALDO STOCK</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <footer>
+        <h1>Pie</h1>
+    </footer>
+
+    <script src="../jquery-3.7.0.js"></script>
+    <script>
+        $(document).ready(() => {
+            let datosJSon;
+            
+            $.getJSON('./datos-tabla.json', (json) => {
+                datosJSon = json;
+            })
+
+            $('#cargar-datos').click(() => {
+                agregarDatos(datosJSon);
+            })
+
+            $('#vaciar-datos').click(() => {
+                $('#tbody-datos').empty();
+            })
+        })
+
+        function agregarDatos(arrayDatosJson) {
+            arrayDatosJson.forEach(element => {
+                let objTr = document.createElement('tr');
+                let objTd1 = document.createElement('td');                
+                let objTd2 = document.createElement('td');                
+                let objTd3 = document.createElement('td');                
+                let objTd4 = document.createElement('td');                
+                let objTd5 = document.createElement('td');                
+                let objTd6 = document.createElement('td');
+                
+                objTd1.innerText = element.codigoArticulo;
+                objTd2.innerText = element.familia;
+                objTd3.innerText = element.um;
+                objTd4.innerText = element.descriopcion;
+                objTd5.innerText = element.fechaAlta;
+                objTd6.innerText = element.saldoStock;
+
+                objTr.appendChild(objTd1);
+                objTr.appendChild(objTd2);
+                objTr.appendChild(objTd3);
+                objTr.appendChild(objTd4);
+                objTr.appendChild(objTd5);
+                objTr.appendChild(objTd6);
+
+
+                $('#tbody-datos').append(objTr);
+            });
+        }
+    </script>
+</body>
+</html>
