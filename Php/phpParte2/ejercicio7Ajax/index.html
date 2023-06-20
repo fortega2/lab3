@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP 07 - Ajax</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        img {
+            max-height: 100%;
+            max-width: 100%;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            height: 80%;
+            width: 80%;
+            margin: auto;
+        }
+
+        .contenedor-form {
+            height: 50%;
+            width: 33.3%;
+            padding: 2rem 0 0 0.4em;
+            background-color: grey;
+        }
+
+        #titulo-form {
+            margin-bottom: 2rem;
+        }
+
+        .contenedor-2 {
+            height: 50%;
+            width: 33.3%;
+            padding: 2rem 0 0 0.4em;
+            background-color: blue;
+            color: white;
+        }
+
+        .contenedor-resultado {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            height: 50%;
+            width: 33.3%;
+            padding: 2rem 0 0 0.4em;
+            background-color: yellow;
+        }
+
+        .contenedor-flecha {
+            opacity: 0;
+        }
+
+        .contenedor-flecha:hover {
+            opacity: 1;
+        }
+        
+        #flecha {
+            height: 50%;
+            width: 50%;
+            margin: 2rem 0 0 5.2rem;
+            cursor: pointer;
+        }
+
+        .contenedor-4 {
+            height: 50%;
+            width: 33.3%;
+            background-color: #434343;
+            padding: 2rem 0 0 0.4em;
+        }
+
+        .contenedor-5 {
+            height: 50%;
+            width: 66.7%;
+            background-color: lightblue;
+        }
+
+        .resultado-clase {
+            margin-bottom: 1.5rem;
+        }
+
+        @media screen and (max-width: 1024px) {
+            #flecha {
+                margin: 4rem 3rem 0 4rem;
+            }
+            
+            .resultado-ajax {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="contenedor-form">
+            <h2 id="titulo-form">Dato de entrada:</h2>
+            <input type="text" name="clave" id="clave">
+        </div>
+        <div class="contenedor-2">
+            <h2>Encriptar</h2>
+            <div class="contenedor-flecha">
+                <img id="flecha" src="flecha-roja-removebg-preview.png" alt="Felcha roja para enviar formulario">
+            </div>
+        </div>
+        <div id="resultado" class="contenedor-resultado">
+            <h2 class="resultado-clase">Resultado:</h2>
+            <div class="resultado-ajax"></div>
+        </div>
+        <div id="estado-requerimiento" class="contenedor-4">
+            <h2 id="titulo-form">Estado del requerimiento:</h2>
+        </div>
+        <div class="contenedor-5"></div>
+    </div>
+    <script src="../../../Especiales/jquery-3.7.0.js"></script>
+    <script>
+        $(document).ready(() => {
+            $('#flecha').click(() => {
+                $('#resultado').empty();
+                $('#resultado').html('<h2>Esperando respuesta...</h2>');
+                $('#estado-requerimiento').empty();
+                $('#estado-requerimiento').html('<h2>Estado del requerimiento: </h2>');
+                $.ajax({
+                    type: "POST",
+                    url: './respuesta.php',
+                    data: { clave: $('#clave').val() },
+                    success: (respuestaServer, estado) => {
+                        $('#resultado').empty();
+                        $('#resultado').html('<h2 class="resultado-clase">Resultado: </h2>' + '<div class="resultado-ajax">' + respuestaServer + '</div>');
+                        $('#estado-requerimiento').append(`<h4 id="titulo-form">${estado}</h4>`);
+                    }
+                })
+            });
+        });
+    </script>
+</body>
+</html>

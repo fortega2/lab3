@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP 08 - Form to JSON</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        header {
+            height: 10%;
+            width: 100%;
+            background-color: #860909;
+        }
+
+        footer {
+            height: 10%;
+            width: 100%;
+            background-color: #860909;
+        }
+
+        .container {
+            height: 80%;
+            width: 100%;
+            background-color: gray;
+        }
+
+        .boton-ventana-modal {
+            height: 5rem;
+            width: 12rem;
+            background-color: orange;
+            color: black;
+            border: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+
+        .container-ventana-modal {
+            display: none;
+        }
+
+        .container-ventana-modal-aparece {
+            position: fixed;
+            top: 25%;
+            left: 25%;
+            height: 50%;
+            width: 50%;
+            background-color: #860909;
+            padding: 1rem;
+            border-radius: 3%;
+        }
+
+        .container-cerrar-ventana-modal {
+            height: 10%;
+            width: 100%;
+            background-color: grey;
+            border-radius: 5px;
+        }
+        
+        .boton-cerrar {
+            height: 100%;
+            width: 10%;
+            float: right;
+            background-color: gray;
+            color: #860909;
+            border: none;
+            cursor: pointer;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            font-size: 1.3em;
+        }
+
+        .container-form-ventana-modal {
+            height: 90%;
+            width: 100%;
+            background-color: #B9B9B9;
+            border-radius: 5px;
+            padding: 0.5rem;
+        }
+
+        label, input {
+            display: block;
+        }
+
+        .boton-enviar {
+            height: 3rem;
+            width: 8rem;
+            background-color: orange;
+            color: black;
+            border: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+
+        .respuesta-server {
+            max-width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .respuesta-server > #respuesta {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        @media (hover: hover) {
+            .boton-ventana-modal:hover {
+                background-color: black;
+                color: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header></header>
+    <div class="container">
+        <button id="botonVentanModal" class="boton-ventana-modal">Ventana modal</button>
+        <div id="ventana-modal" class="container-ventana-modal">
+            <div class="container-cerrar-ventana-modal">
+                <button id="botonCerrar" class="boton-cerrar">X</button>
+            </div>
+            <div class="container-form-ventana-modal">
+                <label for="idUsuario">ID Usuario:</label>
+                <input type="number" name="idUsuario" id="idUsuario">
+                <label for="login">Login:</label>
+                <input type="text" name="login" id="login">
+                <label for="apellido">Apellido:</label>
+                <input type="text" name="apellido" id="apellido">
+                <label for="nombres">Nombres:</label>
+                <input type="text" name="nombres" id="nombres">
+                <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                <input type="date" name="fechaNacimiento" id="fechaNacimiento">
+                <button id="botonEnviar" class="boton-enviar">Enviar</button>
+                <div class="respuesta-server">
+                    <p id="respuesta"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="../../../Especiales/jquery-3.7.0.js"></script>
+    <script>
+        $(document).ready(() => {
+            $('#botonVentanModal').click(() => {
+                $('#ventana-modal').removeClass('container-ventana-modal');
+                $('#ventana-modal').addClass('container-ventana-modal-aparece');
+                $('#respuesta').empty();
+            });
+
+            $('#botonCerrar').click(() => {
+                $('#ventana-modal').removeClass('container-ventana-modal-aparece');
+                $('#ventana-modal').addClass('container-ventana-modal');
+                $('#respuesta').empty();
+            });
+
+            $('#botonEnviar').click(() => {
+                if (confirm('¿Está seguro que desea enviar los datos del formulario?'))
+                {
+                    $('#respuesta').text('Esperando respuesta...');
+                    $.ajax({
+                        type: "POST",
+                        url: './respuesta.php',
+                        data: {
+                            idUsuario: $('#idUsuario').val(),
+                            login: $('#login').val(),
+                            apellido: $('#apellido').val(),
+                            nombres: $('#nombres').val(),
+                            fechaNacimiento: $('#fechaNacimiento').val()
+                        },
+                        success: (respuestaServer, estado) => {
+                            $('#respuesta').text(respuestaServer);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

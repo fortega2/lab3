@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP 05 - Formulario</title>
+    <style>
+        label {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <form action="respuesta-formulario.php" method="post">
+        <label for="nombre">
+            Nombre:
+            <input type="text" name="nombre" id="nombre">
+        </label>
+        <label for="apellido">
+            Apellido:
+            <input type="text" name="apellido" id="apellido">
+        </label>
+        <button type="submit">Ingreso de persona</button>
+    </form>
+</body>
+</html>
