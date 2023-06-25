@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP 09 - BD Lista Ordena Filtros</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        label {
+            font-size: 1.3rem;
+        }
+
+        input {
+            font-size: 1.2rem;
+        }
+
+        #orden {
+            display: block;
+            user-select: none;
+        }
+
+        header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            height: 10%;
+            width: 100%;
+            background-color: rgb(151, 15, 15);
+        }
+
+        footer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 10%;
+            width: 100%;
+            background-color: rgb(151, 15, 15);
+        }
+
+        #titulo-header {
+            margin-left: 10rem;
+        }
+
+        .grupo-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-wrap: wrap;
+            height: 100%;
+            width: 50%;
+        }
+
+        .container-botones-header {
+            height: 100%;
+            width: 50%;
+        }
+
+        .boton-header {
+            height: 90%;
+            width: 49%;
+            font-size: 1.2rem;
+            margin-top: 0.3rem;
+            cursor: pointer;
+        }
+
+        table {
+            height: 80%;
+            width: 100%;
+            background-color: orange;
+            overflow: auto;
+            border-collapse: collapse;
+        }
+
+        thead, tfoot {
+            height: 10%;
+            background-color: grey;
+            font-size: 1.5rem;
+        }
+
+        tbody > tr > td {
+            padding-left: 0.5rem;
+            /* height: 30%; */
+            width: 20%;
+            font-size: 1.5rem;
+        }
+
+        tbody {
+            background-color: orange;
+        }
+
+        /* tbody > tr:nth-child(even) {
+            background-color: rgb(179, 119, 9);
+        } */
+
+        .datos {
+            height: 50%;
+            width: 20%;
+            cursor: pointer;
+        }
+
+        .inputs-header {
+            height: 100%;
+            width: 100%;
+            font-size: 1.7rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id="titulo-header">Articulos</h1>
+        <div class="grupo-header">
+            <div>
+                <label for="orden">Orden:</label>
+                <input type="text" name="orden" id="orden" value="ID" readonly="readonly">
+            </div>
+            <div class="container-botones-header">
+                <button class="boton-header" id="cargar-datos">Cargar datos</button>
+                <button class="boton-header" id="vaciar-datos">Vaciar datos</button>
+            </div>
+        </div>
+    </header>
+    <table>
+        <thead>
+            <tr>
+                <td class="datos" id="titulo-id">ID</td>
+                <td class="datos" id="titulo-marca">Marca</td>
+                <td class="datos" id="titulo-modela">Modelo</td>
+                <td class="datos" id="titulo-fecha">Fecha</td>
+                <td class="datos" id="titulo-precio">Precio</td>
+            </tr>
+            <tr>
+                <td class="datos">
+                    <input class="inputs-header" type="text" name="id" id="id">
+                </td>
+                <td class="datos">
+                    <select class="inputs-header" name="marca" id="marca">
+                        <option selected="true" value=""></option>
+                    </select>
+                </td>
+                <td class="datos">
+                    <input class="inputs-header" type="text" name="modelo" id="modelo">
+                </td>
+                <td class="datos">
+                    <input class="inputs-header" type="date" name="fecha" id="fecha">
+                </td>
+                <td class="datos">
+                    <input class="inputs-header" type="number" name="precio" id="precio">
+                </td>
+            </tr>
+        </thead>
+        <tbody id="datos-grilla"></tbody>
+        <tfoot>
+            <tr>
+                <td>T ID</td>
+                <td>T Marca</td>
+                <td>T Modelo</td>
+                <td>T Fecha</td>
+                <td>T Precio</td>
+            </tr>
+        </tfoot>
+    </table>
+    <footer>
+        <h1>Pie</h1>
+    </footer>
+    <script src="../../../Especiales/jquery-3.7.0.js"></script>
+    <script>
+        $(document).ready(() => {
+            $.ajax({
+                type: 'GET',
+                url: './marcas.php',
+                data: {},
+                success: (respuestaServer, estado) => {
+                    alert(respuestaServer);
+                    const datosParseados = JSON.parse(respuestaServer);
+                    datosParseados.marcas.forEach(marca => {
+                        objOption = document.createElement('option');
+                        objOption.value = marca.marca.toLowerCase();
+                        objOption.innerHTML = marca.marca;
+                        $('#marca').append(objOption);
+                    });
+                }
+            });
+
+            $('#cargar-datos').click(() => {
+                $.ajax({
+                    type: 'GET',
+                    url: './camaras.php',
+                    data: {
+                        orden: $('#orden').val(),
+                        id: $('#id').val(),
+                        marca: $('#marca').val(),
+                        modelo: $('#modelo').val(),
+                        fecha: $('#fecha').val(),
+                        precio: $('#precio').val(),
+                    },
+                    success: (respuestaServer, estado) => {
+                        $('#datos-grilla').empty();
+                        alert(respuestaServer);
+                        const objJson = JSON.parse(respuestaServer);
+                        objJson.camaras.forEach(camara => {
+                            // Creamos un objeto de tipo 'tr'
+                            const objTr = document.createElement('tr');
+
+                            // Creamos un objeto de tipo 'td' para el ID
+                            const objTdId = document.createElement('td');
+                            objTdId.innerHTML = camara.id;
+                            objTr.append(objTdId);
+
+                            // Creamos un objeto de tipo 'td' para la marca
+                            const objTdMarca = document.createElement('td');
+                            objTdMarca.innerHTML = camara.marca;
+                            objTr.append(objTdMarca);
+
+                            // Creamos un objeto de tipo 'td' para el modelo
+                            const objTdModelo = document.createElement('td');
+                            objTdModelo.innerHTML = camara.modelo;
+                            objTr.append(objTdModelo);
+
+                            // Creamos un objeto de tipo 'td' para la fecha
+                            const objTdFecha = document.createElement('td');
+                            objTdFecha.innerHTML = camara.fecha;
+                            objTr.append(objTdFecha);
+
+                            // Creamos un objeto de tipo 'td' para el precio
+                            const objTdPrecio = document.createElement('td');
+                            objTdPrecio.innerHTML = camara.precio;
+                            objTr.append(objTdPrecio);
+
+                            $('#datos-grilla').append(objTr);
+                        });
+                    }
+                });
+            });
+
+            $('#titulo-id').click(() => {
+                $('#orden').val('ID');
+            });
+
+            $('#titulo-marca').click(() => {
+                $('#orden').val('Marca');
+            });
+
+            $('#titulo-modela').click(() => {
+                $('#orden').val('Modelo');
+            });
+
+            $('#titulo-fecha').click(() => {
+                $('#orden').val('Fecha');
+            });
+
+            $('#titulo-precio').click(() => {
+                $('#orden').val('Precio');
+            });
+
+            $('#vaciar-datos').click(() => {
+                $('#datos-grilla').empty();
+            });
+        });
+    </script>
+</body>
+</html>
