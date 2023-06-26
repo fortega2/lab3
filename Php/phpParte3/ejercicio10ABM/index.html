@@ -138,6 +138,15 @@
             background-color: #860909;
         }
 
+        .ventana-modal-respuesta {
+            position: fixed;
+            top: 20%;
+            left: 15%;
+            height: 60%;
+            width: 60%;
+            background-color: #860909;
+        }
+
         .ventana-modal-modificacion {
             position: fixed;
             top: 30%;
@@ -342,37 +351,47 @@
                 <button id="boton-cerrar-alta" class="boton-cerrar">X</button>
             </div>
         </div>
-        <form class="form" id="form-modi" method="post" enctype="multipart/form-data">
+        <form class="form" id="form-alta" method="post" enctype="multipart/form-data">
             <div class="form">
                 <div class="inputs-form">
                     <label for="alta-id">ID:</label>
-                    <input type="number" name="alta-id" id="alta-id" required="true">
+                    <input type="number" name="id" id="alta-id" required="true">
                 </div>
                 <div class="inputs-form">
                     <label for="alta-marca">Marca:</label>
-                    <select name="alta-marca" id="alta-marca"></select>
+                    <select name="marca" id="alta-marca"></select>
                 </div>
                 <div class="inputs-form">
                     <label for="alta-modelo">Modelo:</label>
-                    <input type="text" name="alta-modelo" id="alta-modelo" required="true">
+                    <input type="text" name="modelo" id="alta-modelo" required="true">
                 </div>
                 <div class="inputs-form">
                     <label for="alta-fecha">Fecha:</label>
-                    <input type="date" name="alta-fecha" id="alta-fecha" required="true">
+                    <input type="date" name="fecha" id="alta-fecha" required="true">
                 </div>
                 <div class="inputs-form">
                     <label for="alta-precio">Precio:</label>
-                    <input type="number" name="alta-precio" id="alta-precio" required="true">
+                    <input type="number" name="precio" id="alta-precio" required="true">
                 </div>
                 <div class="inputs-form">
                     <label for="alta-pdf">Documento PDF:</label>
-                    <input type="file" name="alta-pdf" id="alta-pdf">
+                    <input type="file" name="pdf" id="alta-pdf">
                 </div>
+                <input style="display: none;" type="number" name="idOriginal" id="id-original">
             </div>
             <div class="boton-enviar">
                 <button type="submit" id="enviar-alta">Enviar Alta</button>
             </div>
         </form>
+    </div>
+    <div class="ventana-modal-respuesta" id="ventana-modal-respuesta">
+        <div class="ventana-modal-cerrar">
+            <div class="encabezado-modificacion">
+                <h1 class="container-encabezado-modificacion">Encabezado modal ventana respuesta</h1>
+                <button id="boton-cerrar-respuesta" class="boton-cerrar">X</button>
+            </div>
+        </div>
+        <div id="respuesta-server"></div>
     </div>
     <script src="../../../Especiales/jquery-3.7.0.js"></script>
     <script>
@@ -381,6 +400,7 @@
 
             $('#ventana-modal-modificacion').css('visibility', 'hidden');
             $('#ventana-modal-alta').css('visibility', 'hidden');
+            $('#ventana-modal-respuesta').css('visibility', 'hidden');
 
             $.ajax({
                 type: 'GET',
@@ -448,6 +468,9 @@
                             // Creamos un objeto de tipo 'td' para el boton de pdf
                             const objTdPDF = document.createElement('td');
                             objTdPDF.innerHTML = '<button class="botones-datos">PDF</button>';
+                            objTdPDF.onclick = () => {
+                                verArchivoPdf(camara.id);
+                            }
                             objTr.append(objTdPDF);
                             
                             // Creamos un objeto de tipo 'td' para el boton de alta
@@ -519,7 +542,7 @@
                     const datosParseados = JSON.parse(respuestaServer);
                     datosParseados.marcas.forEach(marca => {
                         objOption = document.createElement('option');
-                        objOption.value = marca.marca.toLowerCase();
+                        objOption.value = marca.marca;
                         objOption.innerHTML = marca.marca;
                         $('#alta-marca').append(objOption);
                     });
@@ -533,6 +556,10 @@
 
             $('#boton-cerrar-modificacion').click(() => {
                 $('#ventana-modal-modificacion').css('visibility', 'hidden');
+            });
+
+            $('#boton-cerrar-respuesta').click(() => {
+                $('#ventana-modal-respuesta').css('visibility', 'hidden');
             });
 
             function llenaMarcasCamaras(idCamara) {
@@ -574,32 +601,6 @@
                 });
             }
 
-            function todoListoParaEnviarModi() {
-                // const objForm = document.getElementById('form-modi');
-                // console.log(objForm.checkValidity());
-                // if (objForm.checkValidity() == true) {
-                //     $('#enviar-modificacion').attr('disabled', 'false');
-                // } else {
-                //     $('#enviar-modificacion').attr('disabled', 'true');
-                // }
-            }
-
-            $('#modificacion-id').keyup(() => {
-                todoListoParaEnviarModi();
-            });
-
-            $('#modificacion-modelo').keyup(() => {
-                todoListoParaEnviarModi();
-            });
-
-            $('#modificacion-fecha').keyup(() => {
-                todoListoParaEnviarModi();
-            });
-
-            $('#modificacion-precio').keyup(() => {
-                todoListoParaEnviarModi();
-            });
-
             $('#enviar-modificacion').click((event) => {
                 event.preventDefault();
                 if (confirm('¿Está seguro que desea enviar los datos del formulario de modificación?'))
@@ -623,42 +624,34 @@
                     processData: false,
                     contentType: false,
                     cache: false,
-                    // data: data,
-                    data: {
-                        idOriginal: idOriginal,
-                        id: $('#modificacion-id').val(),
-                        marca: $('#modificacion-marca').val(),
-                        modelo: $('#modificacion-modelo').val(),
-                        fecha: $('#modificacion-fecha').val(),
-                        precio: $('#modificacion-precio').val(),
-                        pdf: $('#modificacion-pdf').val(),
-                    },
+                    data: data,
                     success: (respuestaServer, estado) => {
-                        alert(respuestaServer);
+                        $('#ventana-modal-respuesta').css('visibility', 'visible');
+                        $('#respuesta-server').empty();
+                        $('#respuesta-server').append(`<h1>${respuestaServer}</h1>`);
+                        $('#ventana-modal-modificacion').css('visibility', 'hidden');
                         cargarTabla();
                     }
                 });
             }
 
             function altaCamara() {
+                $('#id-original').val(idOriginal);
+                const data = new FormData($('#form-alta')[0]);
                 $.ajax({
                     type: 'POST',
                     method: 'post',
                     enctype: 'multipart/form-data',
                     url: './altaCamara.php',
-                    // processData: false,
-                    // contentType: false,
-                    // cache: false,
-                    data: {
-                        id: $('#alta-id').val(),
-                        marca: $('#alta-marca').val(),
-                        modelo: $('#alta-modelo').val(),
-                        fecha: $('#alta-fecha').val(),
-                        precio: $('#alta-precio').val(),
-                        pdf: $('#alta-pdf').val(),
-                    },
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data: data,
                     success: (respuestaServer, estado) => {
-                        alert(respuestaServer);
+                        $('#ventana-modal-respuesta').css('visibility', 'visible');
+                        $('#respuesta-server').empty();
+                        $('#respuesta-server').append(`<h1>${respuestaServer}</h1>`);
+                        $('#ventana-modal-alta').css('visibility', 'hidden');
                         cargarTabla();
                     }
                 });
@@ -672,8 +665,26 @@
                         id: idCamara
                     },
                     success: (respuestaServer, estado) => {
-                        alert(respuestaServer);
+                        $('#ventana-modal-respuesta').css('visibility', 'visible');
+                        $('#respuesta-server').empty();
+                        $('#respuesta-server').append(`<h1>${respuestaServer}</h1>`);
                         cargarTabla();
+                    }
+                });
+            }
+
+            function verArchivoPdf(idCamara) {
+                $.ajax({
+                    type: 'POST',
+                    url: './getDocumentoPdf.php',
+                    data: {
+                        id: idCamara
+                    },
+                    success: (respuestaServer, estado) => {
+                        const objDato = JSON.parse(respuestaServer);
+                        $('#ventana-modal-respuesta').css('visibility', 'visible');
+                        $('#respuesta-server').empty();
+                        $('#respuesta-server').html('<iframe width="100%" height="700px" src="data:application/pdf;base64,' + objDato.archivoPdf + '"' + '</iframe>');
                     }
                 });
             }

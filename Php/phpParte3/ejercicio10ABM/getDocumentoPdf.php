@@ -17,19 +17,25 @@
         $respuesta_estado = $respuesta_estado . "\n" . $ex->getMessage();
     }
 
-    $sql = "DELETE FROM camara_fotos WHERE id = :id";    
-    
+    $sql = "SELECT archivopdf FROM camara_fotos WHERE id = :id";
+
     $stmt = $dbh->prepare($sql);
     $respuesta_estado = $respuesta_estado . "\nLa preparacion del sql fue exitoso";
 
     $stmt->bindParam(":id", $id);
     $respuesta_estado = $respuesta_estado . "\nEl bindeo de los campos fue exitoso";
-    
+
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $stmt->execute();
-    $respuesta_estado = $respuesta_estado . "\nEjecucion exitosa de la baja";
+    $respuesta_estado = $respuesta_estado . "\nEjecucion exitosa del archivo pdf";
 
+    $pdf = $stmt->fetch();
+
+    $objCamara = new stdClass(); 
+    $objCamara->archivoPdf = base64_encode($pdf["archivopdf"]);
+    $salidaJson = json_encode($objCamara, JSON_INVALID_UTF8_SUBSTITUTE);
+    
     $dbh = null;
 
-    echo $respuesta_estado;
+    echo $salidaJson;
 ?>

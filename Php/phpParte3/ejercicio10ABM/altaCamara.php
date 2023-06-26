@@ -10,8 +10,6 @@
     $fecha = $_POST["fecha"];
     $precio = $_POST["precio"];
 
-    // $pdf = file_get_contents($_FILES['pdf']['tmp_name']);
-
     $respuesta_estado = "\nRespuesta del servidor el alta. Entradas recibidas en el req http";
     $respuesta_estado = $respuesta_estado . "\nID: $id";
     $respuesta_estado = $respuesta_estado . "\nMarca: $marca";
@@ -27,22 +25,45 @@
         $respuesta_estado = $respuesta_estado . "\n" . $ex->getMessage();
     }
 
-    $sql = "INSERT INTO camara_fotos(id, marca, modelo, fecha, precio, archivopdf) VALUES(:id, :marca, :modelo, :fecha, :precio, null)";    
+    if (empty($_FILES['pdf']['tmp_name'])) {
+        $respuesta_estado = $respuesta_estado . "\nNo se ha seleccionado ningún file para enviar";
+        
+        $sql = "INSERT INTO camara_fotos(id, marca, modelo, fecha, precio, archivopdf) VALUES(:id, :marca, :modelo, :fecha, :precio, null)";    
     
-    $stmt = $dbh->prepare($sql);
-    $respuesta_estado = $respuesta_estado . "\nLa preparacion del sql fue exitoso";
+        $stmt = $dbh->prepare($sql);
+        $respuesta_estado = $respuesta_estado . "\nLa preparacion del sql fue exitoso";
 
-    $stmt->bindParam(":id", $id);
-    $stmt->bindParam(":marca", $marca);
-    $stmt->bindParam(":modelo", $modelo);
-    $stmt->bindParam(":fecha", $fecha);
-    $stmt->bindParam(":precio", $precio);
-    $respuesta_estado = $respuesta_estado . "\nEl bindeo de los campos fue exitoso";
-    
-    $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    $stmt->execute();
+        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":marca", $marca);
+        $stmt->bindParam(":modelo", $modelo);
+        $stmt->bindParam(":fecha", $fecha);
+        $stmt->bindParam(":precio", $precio);
+        $respuesta_estado = $respuesta_estado . "\nEl bindeo de los campos fue exitoso";
+        
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt->execute();
 
-    $respuesta_estado = $respuesta_estado . "\nEjecucion exitosa del alta";
+        $respuesta_estado = $respuesta_estado . "\nEjecucion exitosa del alta";
+    } else {
+        $respuesta_estado = $respuesta_estado . "\nTrae documento pdf asociado al id " . $id;
+
+        $pdf = file_get_contents($_FILES['pdf']['tmp_name']);
+        
+        $sql = "INSERT INTO camara_fotos(id, marca, modelo, fecha, precio, archivopdf) VALUES(:id, :marca, :modelo, :fecha, :precio, :archivopdf)";
+        $stmt = $dbh->prepare($sql);
+        $respuesta_estado = $respuesta_estado . "\nLa preparacion del sql fue exitoso";
+
+        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":marca", $marca);
+        $stmt->bindParam(":modelo", $modelo);
+        $stmt->bindParam(":fecha", $fecha);
+        $stmt->bindParam(":precio", $precio);
+        $stmt->bindParam(':archivopdf', $pdf);
+        $respuesta_estado = $respuesta_estado . "\nEl bindeo de los campos fue exitoso";
+
+        $stmt->execute();
+        $respuesta_estado = $respuesta_estado . "\nEjecucion exitosa del alta";
+    }
 
     $dbh = null;
 

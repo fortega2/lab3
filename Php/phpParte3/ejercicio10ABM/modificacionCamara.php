@@ -11,8 +11,6 @@
     $fecha = $_POST["fecha"];
     $precio = $_POST["precio"];
 
-    // $pdf = file_get_contents($_FILES['pdf']['tmp_name']);
-
     $respuesta_estado = "\nRespuesta del servidor la modificacion. Entradas recibidas en el req http";
     $respuesta_estado = $respuesta_estado . "\nID del registro: $idOriginal";
     $respuesta_estado = $respuesta_estado . "\nID: $id";
@@ -29,7 +27,7 @@
         $respuesta_estado = $respuesta_estado . "\n" . $ex->getMessage();
     }
 
-    $sql = "update camara_fotos set id = :id, marca = :marca, modelo = :modelo, fecha = :fecha, precio = :precio where id = :idOriginal";    
+    $sql = "update camara_fotos set id = :id, marca = :marca, modelo = :modelo, fecha = :fecha, precio = :precio where id = :idOriginal";
     
     $stmt = $dbh->prepare($sql);
     $respuesta_estado = $respuesta_estado . "\nLa preparacion del sql fue exitoso";
@@ -45,7 +43,25 @@
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $stmt->execute();
 
-    $respuesta_estado = $respuesta_estado . "\nEjecucion exitosa de la modificacion";
+    $respuesta_estado = $respuesta_estado . "\nEjecucion exitosa de la modificacion de datos no binario";
+
+    if (empty($_FILES['pdf']['tmp_name'])) {
+        $respuesta_estado = $respuesta_estado . "\nNo se ha seleccionado ningún file para enviar";
+    } else {
+        $respuesta_estado = $respuesta_estado . "\nTrae documento pdf asociado al id " . $idOriginal;
+        $pdf = file_get_contents($_FILES['pdf']['tmp_name']);
+        
+        $sql = "update camara_fotos set archivopdf = :archivopdf where id = :idOriginal";
+        $stmt = $dbh->prepare($sql);
+        $respuesta_estado = $respuesta_estado . "\nLa preparacion del sql binario fue exitoso";
+
+        $stmt->bindParam(':idOriginal', $idOriginal);
+        $stmt->bindParam(':archivopdf', $pdf);
+        $respuesta_estado = $respuesta_estado . "\nEl bindeo de los campos binarios fue exitoso";
+
+        $stmt->execute();
+        $respuesta_estado = $respuesta_estado . "\nEjecucion exitosa de la modificacion de datos binarios";
+    }
 
     $dbh = null;
 
