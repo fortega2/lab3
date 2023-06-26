@@ -103,9 +103,9 @@
             background-color: orange;
         }
 
-        /* tbody > tr:nth-child(even) {
-            background-color: rgb(179, 119, 9);
-        } */
+        tbody > tr:nth-child(even) {
+            background-color: rgb(221, 152, 24);
+        }
 
         .datos {
             height: 50%;
@@ -175,6 +175,7 @@
         </tfoot>
     </table>
     <footer>
+        <p id="nro-registros">Nro de registros: </p>
         <h1>Pie</h1>
     </footer>
     <script src="../../../Especiales/jquery-3.7.0.js"></script>
@@ -197,6 +198,7 @@
             });
 
             $('#cargar-datos').click(() => {
+                $('#datos-grilla').html('<p>Esperando respuesta...</p>');
                 $.ajax({
                     type: 'GET',
                     url: './camaras.php',
@@ -212,6 +214,7 @@
                         $('#datos-grilla').empty();
                         alert(respuestaServer);
                         const objJson = JSON.parse(respuestaServer);
+                        $('#nro-registros').text(`Nro de resitros: ${objJson.camaras.length}`);
                         objJson.camaras.forEach(camara => {
                             // Creamos un objeto de tipo 'tr'
                             const objTr = document.createElement('tr');
@@ -245,6 +248,11 @@
                         });
                     }
                 });
+            });
+
+            $('#vaciar-datos').click(() => {
+                $('#nro-registros').text('Nro de resitros: ');
+                $('#datos-grilla').empty();
             });
 
             $('#titulo-id').click(() => {

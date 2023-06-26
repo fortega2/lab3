@@ -168,8 +168,7 @@
             });
 
             $('#botonEnviar').click(() => {
-                if (confirm('¿Está seguro que desea enviar los datos del formulario?'))
-                {
+                if (confirm('¿Está seguro que desea enviar los datos del formulario?')) {
                     $('#respuesta').text('Esperando respuesta...');
                     $.ajax({
                         type: "POST",
