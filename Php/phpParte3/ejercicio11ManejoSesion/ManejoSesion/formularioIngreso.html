@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Ingreso</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            background-color: gray;
+        }
+
+        label {
+            margin-left: 1rem;
+            font-size: 2rem;
+        }
+
+        input {
+            display: block;
+            width: 50%;
+            margin-bottom: 3rem;
+            margin-left: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .espacio-arriba {
+            height: 20%;
+            width: 100%;
+            display: block;
+            visibility: hidden;
+        }
+
+        .container {
+            height: 40%;
+            width: 50%;
+            margin: auto;
+            background-color: cyan;
+        }
+
+        .titulo {
+            height: 20%;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: nowrap;
+            font-size: 2rem;
+        }
+
+        button {
+            font-size: 2rem;
+            height: 70px;
+        }
+    </style>
+</head>
+<body>
+    <div class="espacio-arriba"></div>
+    <div class="container">
+        <div class="titulo">
+            <h1>Ingreso</h1>
+        </div>
+        <form action="./ingresoAlSistema.php" method="post">
+            <label for="usuario">Usuario:</label>
+            <input type="text" name="usuario" id="usuario">
+            <label for="contra">Contraseña:</label>
+            <input type="password" name="contra" id="contra">
+            <div class="titulo">
+                <button type="submit">Ingresar al sistema</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

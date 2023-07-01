@@ -1,0 +1,720 @@
+<?php
+    session_start();
+    if (!isset($_SESSION["idSesion"])) {
+        header("location:../ManejoSesion/index.php");
+        exit();
+    }
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP 10 - ABM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        label {
+            font-size: 1.3rem;
+        }
+
+        input {
+            font-size: 1.2rem;
+        }
+
+        #orden {
+            display: block;
+            user-select: none;
+        }
+
+        .container {
+            height: 100%;
+            width: 100%;
+        }
+
+        header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            height: 10%;
+            width: 100%;
+            background-color: rgb(151, 15, 15);
+        }
+
+        footer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 10%;
+            width: 100%;
+            background-color: rgb(151, 15, 15);
+        }
+
+        #titulo-header {
+            margin-left: 5rem;
+        }
+
+        .grupo-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-wrap: wrap;
+            height: 100%;
+            width: 70%;
+        }
+
+        .container-botones-header {
+            height: 100%;
+            width: 50%;
+        }
+
+        .boton-header {
+            height: 90%;
+            width: 17%;
+            font-size: 1rem;
+            margin-top: 0.3rem;
+            cursor: pointer;
+        }
+
+        table {
+            height: 80%;
+            width: 100%;
+            background-color: orange;
+            overflow: auto;
+            border-collapse: collapse;
+        }
+
+        thead, tfoot {
+            height: 10%;
+            background-color: grey;
+            font-size: 1.5rem;
+        }
+
+        tbody > tr > td {
+            padding-left: 0.5rem;
+            width: 12.5%;
+            font-size: 1.5rem;
+        }
+
+        tbody {
+            background-color: orange;
+        }
+
+        tbody > tr:nth-child(even) {
+            background-color: rgb(221, 152, 24);
+        }
+
+        .datos {
+            height: 50%;
+            width: 12.5%;
+            cursor: pointer;
+        }
+
+        .botones-datos {
+            height: 3rem;
+            width: 4rem;
+            cursor: pointer;
+        }
+
+        .inputs-header {
+            height: 100%;
+            width: 100%;
+            font-size: 1.7rem;
+        }
+
+        .ventana-modal-alta {
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            height: 40%;
+            width: 40%;
+            background-color: #860909;
+        }
+
+        .ventana-modal-respuesta {
+            position: fixed;
+            top: 20%;
+            left: 15%;
+            height: 60%;
+            width: 60%;
+            background-color: #860909;
+        }
+
+        .ventana-modal-modificacion {
+            position: fixed;
+            top: 30%;
+            left: 40%;
+            height: 40%;
+            width: 40%;
+            background-color: #860909;
+        }
+
+        .ventana-modal-cerrar {
+            height: 10%;
+            width: 100%;
+            background-color: grey;
+        }
+
+        .encabezado-modificacion {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        .container-encabezado-modificacion {
+            width: 90%;
+        }
+
+        .boton-cerrar {
+            height: 100%;
+            width: 10%;
+            float: right;
+            background-color: gray;
+            color: #860909;
+            border: none;
+            cursor: pointer;
+            font-size: 1.3em;
+        }
+
+        .form {
+            height: 90%;
+            width: 100%;
+        }
+
+        .form > .form {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .inputs-form {
+            height: 30%;
+            width: 50%;
+            padding: 2rem;
+        }
+
+        .form > .form > .inputs-form > input {
+            display: block;
+            height: 60%;
+            width: 100%;
+            margin-top: 0.2rem;
+        }
+
+        .form > .form > .inputs-form > select {
+            display: block;
+            height: 70%;
+            width: 100%;
+            font-size: 1rem;
+            margin-top: 0.2rem;
+        }
+
+        .boton-enviar {
+            height: 10%;
+            width: 100%;
+            text-align: center;
+        }
+
+        .boton-enviar > button {
+            height: 100%;
+            width: 30%;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="titulo-header">Articulos</h1>
+            <div class="grupo-header">
+                <div>
+                    <label for="orden">Orden:</label>
+                    <input type="text" name="orden" id="orden" value="ID" readonly="readonly">
+                </div>
+                <div class="container-botones-header">
+                    <button class="boton-header" id="cargar-datos">Cargar datos</button>
+                    <button class="boton-header" id="vaciar-datos">Vaciar datos</button>
+                    <button class="boton-header" id="limpiar-filtros">Limpiar filtros</button>
+                    <button class="boton-header" id="alta-registros">Alta registros</button>
+                    <button class="boton-header" id="cerrar-sesion">Cerrar Sesión</button>
+                </div>
+            </div>
+        </header>
+        <table>
+            <thead>
+                <tr>
+                    <td class="datos" id="titulo-id">ID</td>
+                    <td class="datos" id="titulo-marca">Marca</td>
+                    <td class="datos" id="titulo-modela">Modelo</td>
+                    <td class="datos" id="titulo-fecha">Fecha</td>
+                    <td class="datos" id="titulo-precio">Precio</td>
+                    <td class="datos" style="cursor: default" id="titulo-pdf">PDF</td>
+                    <td class="datos" style="cursor: default;" id="titulo-mod">Mod</td>
+                    <td class="datos" style="cursor: default;" id="titulo-baja">Baja</td>
+                </tr>
+                <tr>
+                    <td class="datos">
+                        <input class="inputs-header" type="text" name="id" id="id">
+                    </td>
+                    <td class="datos">
+                        <select class="inputs-header" name="marca" id="marca">
+                            <option selected="true" value=""></option>
+                        </select>
+                    </td>
+                    <td class="datos">
+                        <input class="inputs-header" type="text" name="modelo" id="modelo">
+                    </td>
+                    <td class="datos">
+                        <input class="inputs-header" type="date" name="fecha" id="fecha">
+                    </td>
+                    <td class="datos">
+                        <input class="inputs-header" type="number" name="precio" id="precio">
+                    </td>
+                </tr>
+            </thead>
+            <tbody id="datos-grilla"></tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+        <footer>
+            <p id="nro-registros">Nro de registros: </p>
+            <h1>Pie</h1>
+        </footer>
+    </div>
+    <div class="ventana-modal-modificacion" id="ventana-modal-modificacion">
+        <div class="ventana-modal-cerrar">
+            <div class="encabezado-modificacion">
+                <h1 class="container-encabezado-modificacion">Encabezado modal formulario de modificación</h1>
+                <button id="boton-cerrar-modificacion" class="boton-cerrar">X</button>
+            </div>
+        </div>
+        <form class="form" id="form-modi" method="post" enctype="multipart/form-data">
+            <div class="form">
+                <div class="inputs-form">
+                    <label for="modificacion-id">ID:</label>
+                    <input type="number" name="id" id="modificacion-id" required="true">
+                </div>
+                <div class="inputs-form">
+                    <label for="modificacion-marca">Marca:</label>
+                    <select name="marca" id="modificacion-marca"></select>
+                </div>
+                <div class="inputs-form">
+                    <label for="modificacion-modelo">Modelo:</label>
+                    <input type="text" name="modelo" id="modificacion-modelo" required="true">
+                </div>
+                <div class="inputs-form">
+                    <label for="modificacion-fecha">Fecha:</label>
+                    <input type="date" name="fecha" id="modificacion-fecha" required="true">
+                </div>
+                <div class="inputs-form">
+                    <label for="modificacion-precio">Precio:</label>
+                    <input type="number" name="precio" id="modificacion-precio" required="true">
+                </div>
+                <div class="inputs-form">
+                    <label for="modificacion-pdf">Documento PDF:</label>
+                    <input type="file" name="pdf" id="modificacion-pdf">
+                </div>
+                <input style="display: none;" type="number" name="idOriginal" id="id-original">
+            </div>
+            <div class="boton-enviar">
+                <button type="submit" id="enviar-modificacion">Enviar modificación</button>
+            </div>
+        </form>
+    </div>
+    <div class="ventana-modal-alta" id="ventana-modal-alta">
+        <div class="ventana-modal-cerrar">
+            <div class="encabezado-modificacion">
+                <h1 class="container-encabezado-modificacion">Encabezado modal formulario de alta</h1>
+                <button id="boton-cerrar-alta" class="boton-cerrar">X</button>
+            </div>
+        </div>
+        <form class="form" id="form-alta" method="post" enctype="multipart/form-data">
+            <div class="form">
+                <div class="inputs-form">
+                    <label for="alta-id">ID:</label>
+                    <input type="number" name="id" id="alta-id" required="true">
+                </div>
+                <div class="inputs-form">
+                    <label for="alta-marca">Marca:</label>
+                    <select name="marca" id="alta-marca"></select>
+                </div>
+                <div class="inputs-form">
+                    <label for="alta-modelo">Modelo:</label>
+                    <input type="text" name="modelo" id="alta-modelo" required="true">
+                </div>
+                <div class="inputs-form">
+                    <label for="alta-fecha">Fecha:</label>
+                    <input type="date" name="fecha" id="alta-fecha" required="true">
+                </div>
+                <div class="inputs-form">
+                    <label for="alta-precio">Precio:</label>
+                    <input type="number" name="precio" id="alta-precio" required="true">
+                </div>
+                <div class="inputs-form">
+                    <label for="alta-pdf">Documento PDF:</label>
+                    <input type="file" name="pdf" id="alta-pdf">
+                </div>
+                <input style="display: none;" type="number" name="idOriginal" id="id-original">
+            </div>
+            <div class="boton-enviar">
+                <button type="submit" id="enviar-alta">Enviar Alta</button>
+            </div>
+        </form>
+    </div>
+    <div class="ventana-modal-respuesta" id="ventana-modal-respuesta">
+        <div class="ventana-modal-cerrar">
+            <div class="encabezado-modificacion">
+                <h1 class="container-encabezado-modificacion">Encabezado modal ventana respuesta</h1>
+                <button id="boton-cerrar-respuesta" class="boton-cerrar">X</button>
+            </div>
+        </div>
+        <div id="respuesta-server"></div>
+    </div>
+    <script src="../../../../Especiales/jquery-3.7.0.js"></script>
+    <script>
+        $(document).ready(() => {
+            let idOriginal;
+
+            $('#ventana-modal-modificacion').css('visibility', 'hidden');
+            $('#ventana-modal-alta').css('visibility', 'hidden');
+            $('#ventana-modal-respuesta').css('visibility', 'hidden');
+
+            $.ajax({
+                type: 'GET',
+                url: '../ManejoSesion/marcas.php',
+                data: {},
+                success: (respuestaServer, estado) => {
+                    alert(respuestaServer);
+                    const datosParseados = JSON.parse(respuestaServer);
+                    datosParseados.marcas.forEach(marca => {
+                        objOption = document.createElement('option');
+                        objOption.value = marca.marca.toLowerCase();
+                        objOption.innerHTML = marca.marca;
+                        $('#marca').append(objOption);
+                    });
+                }
+            });
+
+            function cargarTabla() {
+                $('#datos-grilla').html('<p>Esperando respuesta...</p>');
+                $.ajax({
+                    type: 'GET',
+                    url: '../ManejoSesion/camaras.php',
+                    data: {
+                        orden: $('#orden').val(),
+                        id: $('#id').val(),
+                        marca: $('#marca').val(),
+                        modelo: $('#modelo').val(),
+                        fecha: $('#fecha').val(),
+                        precio: $('#precio').val(),
+                    },
+                    success: (respuestaServer, estado) => {
+                        $('#datos-grilla').empty();
+                        alert(respuestaServer);
+                        const objJson = JSON.parse(respuestaServer);
+                        $('#nro-registros').text(`Nro de resitros: ${objJson.camaras.length}`);
+                        objJson.camaras.forEach(camara => {
+                            // Creamos un objeto de tipo 'tr'
+                            const objTr = document.createElement('tr');
+
+                            // Creamos un objeto de tipo 'td' para el ID
+                            const objTdId = document.createElement('td');
+                            objTdId.innerHTML = camara.id;
+                            objTr.append(objTdId);
+
+                            // Creamos un objeto de tipo 'td' para la marca
+                            const objTdMarca = document.createElement('td');
+                            objTdMarca.innerHTML = camara.marca;
+                            objTr.append(objTdMarca);
+
+                            // Creamos un objeto de tipo 'td' para el modelo
+                            const objTdModelo = document.createElement('td');
+                            objTdModelo.innerHTML = camara.modelo;
+                            objTr.append(objTdModelo);
+
+                            // Creamos un objeto de tipo 'td' para la fecha
+                            const objTdFecha = document.createElement('td');
+                            objTdFecha.innerHTML = camara.fecha;
+                            objTr.append(objTdFecha);
+
+                            // Creamos un objeto de tipo 'td' para el precio
+                            const objTdPrecio = document.createElement('td');
+                            objTdPrecio.innerHTML = camara.precio;
+                            objTr.append(objTdPrecio);
+
+                            // Creamos un objeto de tipo 'td' para el boton de pdf
+                            const objTdPDF = document.createElement('td');
+                            objTdPDF.innerHTML = '<button class="botones-datos">PDF</button>';
+                            objTdPDF.onclick = () => {
+                                verArchivoPdf(camara.id);
+                            }
+                            objTr.append(objTdPDF);
+                            
+                            // Creamos un objeto de tipo 'td' para el boton de alta
+                            const objTdModi = document.createElement('td');
+                            objTdModi.innerHTML = '<button class="botones-datos">Modi</button>';
+                            objTdModi.onclick = () => {
+                                $('#container').css('opacity', '0.3');
+                                $('#container').css('user-select', 'none');
+                                $('#ventana-modal-modificacion').css('visibility', 'visible');
+                                llenaMarcasCamaras(camara.id);
+                            }
+                            objTr.append(objTdModi);
+
+                            // Creamos un objeto de tipo 'td' para el boton de baja
+                            const objTdBaja = document.createElement('td');
+                            objTdBaja.innerHTML = '<button class="botones-datos">Baja</button>';
+                            objTdBaja.onclick = () => {
+                                if (confirm(`¿Está seguro que desea eeliminar el registro con id ${camara.id}?`))
+                                    bajaCamara(camara.id);
+                            }
+                            objTr.append(objTdBaja);
+
+                            $('#datos-grilla').append(objTr);
+                        });
+                    }
+                });
+            }
+
+            $('#cargar-datos').click(() => {
+                cargarTabla();
+            });
+
+            $('#vaciar-datos').click(() => {
+                $('#nro-registros').text('Nro de resitros: ');
+                $('#datos-grilla').empty();
+            });
+
+            $('#cerrar-sesion').click(() => {
+                console.log('hola');
+                location.href = '../ManejoSesion/destruirSesion.php';
+            });
+
+            $('#titulo-id').click(() => {
+                $('#orden').val('ID');
+            });
+
+            $('#titulo-marca').click(() => {
+                $('#orden').val('Marca');
+            });
+
+            $('#titulo-modela').click(() => {
+                $('#orden').val('Modelo');
+            });
+
+            $('#titulo-fecha').click(() => {
+                $('#orden').val('Fecha');
+            });
+
+            $('#titulo-precio').click(() => {
+                $('#orden').val('Precio');
+            });
+
+            $('#vaciar-datos').click(() => {
+                $('#datos-grilla').empty();
+            });
+
+            $('#alta-registros').click(() => {
+                $('#ventana-modal-alta').css('visibility', 'visible');
+                $.ajax({
+                type: 'GET',
+                url: '../ManejoSesion/marcas.php',
+                data: {},
+                success: (respuestaServer, estado) => {
+                    const datosParseados = JSON.parse(respuestaServer);
+                    datosParseados.marcas.forEach(marca => {
+                        objOption = document.createElement('option');
+                        objOption.value = marca.marca;
+                        objOption.innerHTML = marca.marca;
+                        $('#alta-marca').append(objOption);
+                    });
+                }
+                });
+            });
+
+            $('#boton-cerrar-alta').click(() => {
+                $('#ventana-modal-alta').css('visibility', 'hidden');
+            });
+
+            $('#boton-cerrar-modificacion').click(() => {
+                $('#ventana-modal-modificacion').css('visibility', 'hidden');
+            });
+
+            $('#boton-cerrar-respuesta').click(() => {
+                $('#ventana-modal-respuesta').css('visibility', 'hidden');
+            });
+
+            function llenaMarcasCamaras(idCamara) {
+                $('#modificacion-marca').empty();
+                $.ajax({
+                type: 'GET',
+                url: '../ManejoSesion/marcas.php',
+                data: {},
+                success: (respuestaServer, estado) => {
+                    const datosParseados = JSON.parse(respuestaServer);
+                    datosParseados.marcas.forEach(marca => {
+                        objOption = document.createElement('option');
+                        objOption.value = marca.marca;
+                        objOption.innerHTML = marca.marca;
+                        $('#modificacion-marca').append(objOption);
+                    });
+                    completaFichaCamaras(idCamara)
+                }
+            });
+            }
+
+            function completaFichaCamaras(idCamara) {
+                const objAjax = $.ajax({
+                    type: 'GET',
+                    url: '../ManejoSesion/getCamaraPorId.php',
+                    data: {
+                        id: idCamara
+                    },
+                    success: (respuestaServer, estado) => {
+                        idOriginal = idCamara;
+                        alert(respuestaServer);
+                        objCamara = JSON.parse(respuestaServer);
+                        $('#modificacion-id').val(parseInt(objCamara.camaras[0].id));
+                        $('#modificacion-marca').val(objCamara.camaras[0].marca);
+                        $('#modificacion-modelo').val(objCamara.camaras[0].modelo);
+                        $('#modificacion-fecha').val(objCamara.camaras[0].fecha);
+                        $('#modificacion-precio').val(objCamara.camaras[0].precio);
+                    }
+                });
+            }
+
+            $('#enviar-modificacion').click((event) => {
+                event.preventDefault();
+                if (confirm('¿Está seguro que desea enviar los datos del formulario de modificación?'))
+                    modificacionCamara();
+            });
+
+            $('#enviar-alta').click((event) => {
+                event.preventDefault();
+                if (confirm('¿Está seguro que desea enviar los datos del formulario de alta?'))
+                    altaCamara();
+            });
+
+            function modificacionCamara() {
+                $('#id-original').val(idOriginal);
+                const data = new FormData($('#form-modi')[0]);
+                $.ajax({
+                    type: 'POST',
+                    method: 'post',
+                    enctype: 'multipart/form-data',
+                    url: '../ManejoSesion/modificacionCamara.php',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data: data,
+                    success: (respuestaServer, estado) => {
+                        $('#ventana-modal-respuesta').css('visibility', 'visible');
+                        $('#respuesta-server').empty();
+                        $('#respuesta-server').append(`<h1>${respuestaServer}</h1>`);
+                        $('#ventana-modal-modificacion').css('visibility', 'hidden');
+                        cargarTabla();
+                    }
+                });
+            }
+
+            function altaCamara() {
+                $('#id-original').val(idOriginal);
+                const data = new FormData($('#form-alta')[0]);
+                $.ajax({
+                    type: 'POST',
+                    method: 'post',
+                    enctype: 'multipart/form-data',
+                    url: '../ManejoSesion/altaCamara.php',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data: data,
+                    success: (respuestaServer, estado) => {
+                        $('#ventana-modal-respuesta').css('visibility', 'visible');
+                        $('#respuesta-server').empty();
+                        $('#respuesta-server').append(`<h1>${respuestaServer}</h1>`);
+                        $('#ventana-modal-alta').css('visibility', 'hidden');
+                        cargarTabla();
+                    }
+                });
+            }
+
+            function bajaCamara(idCamara) {
+                $.ajax({
+                    type: 'POST',
+                    url: '../ManejoSesion/bajaCamara.php',
+                    data: {
+                        id: idCamara
+                    },
+                    success: (respuestaServer, estado) => {
+                        $('#ventana-modal-respuesta').css('visibility', 'visible');
+                        $('#respuesta-server').empty();
+                        $('#respuesta-server').append(`<h1>${respuestaServer}</h1>`);
+                        cargarTabla();
+                    }
+                });
+            }
+
+            function verArchivoPdf(idCamara) {
+                $.ajax({
+                    type: 'POST',
+                    url: '../ManejoSesion/getDocumentoPdf.php',
+                    data: {
+                        id: idCamara
+                    },
+                    success: (respuestaServer, estado) => {
+                        const objDato = JSON.parse(respuestaServer);
+                        $('#ventana-modal-respuesta').css('visibility', 'visible');
+                        $('#respuesta-server').empty();
+                        $('#respuesta-server').html('<iframe width="100%" height="700px" src="data:application/pdf;base64,' + objDato.archivoPdf + '"' + '</iframe>');
+                    }
+                });
+            }
+            
+            function limpiarFiltros() {
+                $('#orden').val('ID');
+                $('#id').val('');
+                $('#marca').val('');
+                $('#modelo').val('');
+                $('#fecha').val('');
+                $('#precio').val('');
+            }
+
+            $('#limpiar-filtros').click(() => {
+                limpiarFiltros();
+            });
+        });
+    </script>
+</body>
+</html>
